@@ -1,0 +1,17 @@
+.alert-style {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3333;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(128, 128, 128, 0.712);
+}
+
+.alert-style .alert {
+    width: 80vh;
+}

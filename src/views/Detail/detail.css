@@ -1,0 +1,28 @@
+.container-detail {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.breadcrumb-detail {
+    --bs-breadcrumb-divider:'›'
+}
+
+.link-breadcrumd-detail {
+    text-decoration: none;
+    color: gray;
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.card-detail{
+    border-radius: 10px;
+    border: none;
+}
+
+.card-detail img{
+    border-radius: 10px;
+}
+
+.title-detail {
+    font-weight: 800;
+}

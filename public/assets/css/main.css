@@ -1,0 +1,412 @@
+@font-face {
+    font-family: 'Metropolis Reguler';
+    src: url('../fonts/metropolis/Metropolis-Regular.otf');
+}
+
+@font-face {
+    font-family: 'Metropolis Medium';
+    src: url('../fonts/metropolis/Metropolis-Medium.otf');
+}
+
+@font-face {
+    font-family: 'Metropolis Light';
+    src: url('../fonts/metropolis/Metropolis-Light.otf');
+}
+
+@font-face {
+    font-family: 'Metropolis Bold';
+    src: url('../fonts/metropolis/Metropolis-Bold.otf');
+}
+
+.material-icons-outlined {
+    font-size: 18px;  /* Preferred icon size */
+}
+
+* {
+    font-family: 'Metropolis Reguler', serif;
+}
+
+main {
+    margin-top: 78px;
+    margin-bottom: 70px;
+}
+
+body {
+    background-color: #F9F9F9;
+}
+
+.text-light {
+    font-family: 'Metropolis Light', serif;
+}
+
+.text-medium {
+    font-family: 'Metropolis Medium', serif;
+}
+
+.text-bold {
+    font-family: 'Metropolis Bold', serif;
+}
+
+.form-control {
+    border: none;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.bg-red {
+    background-color: #DB3022;
+}
+
+.btn-outline-danger {
+    color: grey;
+}
+
+.btn-danger {
+    background-color: #DB3022;
+}
+
+.icon-24 {
+    font-size: 25px;
+}
+
+
+.bg-content {
+    background: #E5E5E5;
+}
+
+/* navbar button screen mobile */
+.navbar-bottom {
+    border-radius: 12px 12px 0px 0px;
+}
+
+.nav-title {
+    font-size: 0.7rem;
+    width: 50px;
+    position: relative;
+    top: -12px;
+}
+
+.link-active {
+    border-bottom: 3px green solid !important;
+    padding-bottom: 5px !important;
+}
+
+.nav-icon {
+    width: 50px;
+}
+
+.search {
+    width: 35%;
+}
+
+.search .input-group span {
+    margin-left: -50px !important;
+    z-index: 1;
+}
+
+/* 
+
+    reset style owl carousel
+    slide categori section 
+
+*/
+
+.category .item .card {
+    border-radius: 10px;
+    max-width: 20vh;
+}
+
+.category .owl-nav {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* prev button  */
+
+.category .owl-nav .owl-prev {
+    background-color: #ffff !important;
+    width: 30px;
+    height: 30px;
+    margin: 0 0 0 -15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+}
+
+.category .owl-nav .owl-prev span {
+    margin-top: -3px;
+    margin-left: 10px;
+    font-size: 30px;
+}
+
+.category .owl-nav .owl-prev:hover {
+    color: black;
+    opacity: 0.8;
+}
+
+/* next button  */
+
+.category .owl-nav .owl-next {
+    background-color: #ffff !important;
+    width: 30px;
+    height: 30px;
+    margin: 0 -15px 0 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+}
+
+.category .owl-nav .owl-next span {
+    margin-top: -3px;
+    margin-left: 10px;
+    font-size: 30px;
+}
+
+.category .owl-nav .owl-next:hover {
+    color: black;
+    opacity: 0.8;
+}
+
+/* 
+
+    reset style owl carousel
+    slide trend section 
+
+*/
+
+.trend .item .card {
+    border-radius: 15px !important;
+    width: 360px;
+    height: 120px;
+    
+}
+
+.trend .item .title {
+    position: relative;
+    top: -80px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+}
+
+.trend .item .card .card-img {
+    border-radius: 15px;
+    background-size: cover !important;
+    width: 360px;
+    height: 120px;
+}
+
+.trend .owl-dots {
+    display: flex;
+    align-items: flex-start;
+}
+
+.trend .owl-dots .owl-dot span {
+    width: 7px !important;
+    height: 7px !important;
+    margin: 4px;
+}
+.trend .owl-nav {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+/* prev button  */
+
+.trend .owl-nav .owl-prev {
+    background-color: #ffff !important;
+    width: 30px;
+    height: 30px;
+    margin: 0 0 0 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+}
+
+.trend .owl-nav .owl-prev span {
+    margin-top: -3px;
+    margin-left: 10px;
+    font-size: 30px;
+}
+
+.trend .owl-nav .owl-prev:hover {
+    color: black;
+    opacity: 0.8;
+}
+/* next button  */
+
+.trend .owl-nav .owl-next {
+    background-color: #ffff !important;
+    width: 30px;
+    height: 30px;
+    margin: 0 15px 0 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+}
+
+.trend .owl-nav .owl-next span {
+    margin-top: -3px;
+    margin-left: 10px;
+    font-size: 30px;
+}
+
+.trend .owl-nav .owl-next:hover {
+    color: black;
+    opacity: 0.8;
+}
+
+
+/* card style */
+
+.card-body .card-title {
+    margin: 0;
+}
+
+.card-body .price {
+    color: red;
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.card-body .brand {
+    font-size: 0.7rem;
+}
+
+.card-body .star {
+    color: #FFBA49;
+    font-size: .7rem;
+}
+
+.card-body .star .material-icons-outlined {
+    font-size: 15px;
+}
+
+.card-body .review {
+    color: grey;
+    margin: -2px 6px;
+    font-size: 0.75rem;
+}
+
+.card {
+    border-radius: 10px;
+    border: none;
+}
+
+/* modal filter  */
+
+.colors .form-check input {
+    width: 40px;
+    height: 40px;
+    border: none;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.247);
+    appearance: none;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.colors .form-check input:checked {
+    border: 1px red solid;
+}
+
+
+.colors .form-check .color1 {
+    background-color: #020202;
+}
+
+.colors .form-check .color2 {
+    background-color: #ffff;
+}
+
+.colors .form-check .color3 {
+    background-color: #B82222;
+}
+
+.colors .form-check .color4 {
+    background-color: #BEA9A9;
+}
+
+.colors .form-check .color5 {
+    background-color: #E2BB8D;
+}
+
+.colors .form-check .color6 {
+    background-color: #151867;
+}
+
+/* size  */
+.size .form-check {
+    margin: 10px !important;
+}
+.size .form-check input {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    appearance: none;
+    background-color: transparent;
+}
+
+.size .form-check span {
+    width: 40px;
+    height: 40px;
+    border: none;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.247);
+    border-radius: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.size .form-check input:checked ~ span {
+    color: white;
+    background-color: red;
+}
+
+/* form-check-category  */
+.form-check-category .form-check {
+    margin: 10px !important;
+}
+.form-check-category .form-check input {
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    appearance: none;
+    background-color: transparent;
+}
+
+.form-check-category .form-check span {
+    width: 100px;
+    height: 40px;
+    border: none;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.247);
+    border-radius: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-check-category .form-check input:checked ~ span {
+    color: white;
+    background-color: red;
+}
+
+
+/* bag  */
+
+.bag-title {
+    width: 30vw;
+}
+.bag-price {
+    width: 25vw;
+}
