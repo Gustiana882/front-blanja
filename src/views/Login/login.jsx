@@ -17,7 +17,7 @@ class Login extends Component {
         e.preventDefault();
         axios({
             method: 'post',
-            url: 'http://localhost:9000/login',
+            url: 'http://192.168.43.152:9000/login',
             data: {
                 email: "emailTest@gmail.com",
                 password: "test1234",
@@ -27,9 +27,10 @@ class Login extends Component {
             .then((response) => {
                 const res = response.data;
                 const token = res.data[0].token_key;
+                const image = `http://localhost:9000/${res.data[0].image}`;
 
                 if (res.message == 'login berhasil!') {
-                    cookie.setCookie(true, token)
+                    cookie.setCookie(true, token, image)
                     return this.props.history.goBack('/')
                 }
             });

@@ -6,8 +6,8 @@ import Star from '../../component/star/star'
 import BtnQty from "../../component/btn-qty/btn-qty";
 import ProgressBar from "../../component/progres-bar/progres-bar";
 import axios from "axios";
-import Alert from '../../component/alert/alert'
 import Cookie from '../../helper/cookie'
+import { toast } from 'react-toastify'
 
 
 class Detail extends Component {
@@ -16,14 +16,13 @@ class Detail extends Component {
         this.state = {
             product: [],
             qty: 1,
-            notif: ''
         }
     }
 
     getDataProductById = async () => {
         const { params } = this.props.match
         try {
-            const res = await axios({ method: 'get', url: `http://localhost:9000/product/${params.items.split('-').pop()}` })
+            const res = await axios({ method: 'get', url: `http://192.168.43.152:9000/product/${params.items.split('-').pop()}` })
             this.setState({ product: res.data.data[0] })
         } catch (error) {
             alert('Maaf API Offline')
@@ -42,7 +41,7 @@ class Detail extends Component {
             console.log(cookie)
             axios({
                 method: 'post',
-                url: 'http://localhost:9000/bag',
+                url: 'http://192.168.43.152:9000/bag',
                 headers: {'token': cookie.token},
                 data: {
                     productId: id,
@@ -52,9 +51,9 @@ class Detail extends Component {
             }).then((res) => {
                 const data = res.data
                 if (data.statusCode === 200 && data.message == 'add data bag success'){
-                    return this.setState({ notif: <Alert message={data.message} type="success" close={()=> this.setState({notif: ''})}/> })
+                    return toast.success(data.message)
                 } else {
-                    return this.setState({ notif: <Alert message={data.message} type="danger" close={()=> this.setState({notif: ''})}/> })
+                    return toast.success(data.message)
                 }
             })
         }
@@ -96,11 +95,11 @@ class Detail extends Component {
                     <section className="row justify-content-md-center">
                         <div className="col-12 col-md-6 col-lg-4 px-4">
                             <div className="card card-detail">
-                                <img src={`http://localhost:9000/${this.state.product.image}`} className="card-img-top" alt="..." />
+                                <img src={`http://192.168.43.152:9000/${this.state.product.image}`} className="card-img-top" alt="..." />
                             </div>
 
                         </div>
-                        <div className="col-12 col-md-6 col-lg-5 px-4">
+                        <div className="col-12 col-md-6 col-lg-5">
                             <div>
                                 <h4 className="fw-bold m-0">{this.state.product.name}</h4>
                                 <p className="text-muted m-0"><small className="fw-bolder text-secodary">{this.state.product.brand}</small></p>
@@ -134,7 +133,7 @@ class Detail extends Component {
                             </div>
                         </div>
                     </section>
-                    <section className="col-12 col-md-12 col-lg-8 ms-auto me-auto px-2">
+                    <section className="col-12 col-md-12 col-lg-8 ms-auto me-auto">
                         <div className="mt-4">
                             <h4 className="fw-bolder">Informasi Product</h4>
                         </div>
@@ -143,13 +142,13 @@ class Detail extends Component {
                             <h5 className="fw-bolder text-danger">{this.state.product.condition}</h5>
                         </div>
                         <div className="mt-4">
-                            <h5 className="fw-bolder">Description</h5>
-                            <div className="text-muted">
-                                <p>{this.state.product.description}</p>
+                            <h4 className="fw-bolder">Description</h4>
+                            <div className="mx-3 text-muted">
+                                <div dangerouslySetInnerHTML={{ __html: this.state.product.description}} />
                             </div>
                         </div>
                     </section>
-                    <section className="mt-5 col-12 col-md-12 col-lg-8 ms-auto me-auto px-4">
+                    <section className="mt-5 col-12 col-md-12 col-lg-8 ms-auto me-auto">
                         <h5 className="fw-bolder">Product Review</h5>
                         <div className="row">
                             <div className="col-12 col-sm-6">

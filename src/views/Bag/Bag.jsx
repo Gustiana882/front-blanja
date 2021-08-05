@@ -24,7 +24,7 @@ class Bag extends Component {
     getBag = async () => {
         try {
             const token = this.isLogin.token
-            const response = await axios({ method: 'get', url: 'http://localhost:9000/bag', headers: { 'token': token } })
+            const response = await axios({ method: 'get', url: 'http://192.168.43.152:9000/bag', headers: { 'token': token } })
             const { data } = response.data
             this.setState({
                 message: response.data.message,
@@ -46,7 +46,7 @@ class Bag extends Component {
             const token = this.isLogin.token
             const response = await axios({
                 method: 'put',
-                url: 'http://localhost:9000/bag',
+                url: 'http://192.168.43.152:9000/bag',
                 headers: { 'token': token },
                 data: {
                     id: id,
@@ -92,8 +92,8 @@ class Bag extends Component {
             for (let i = 0; i < this.state.listDeleteBag.length; i++) {
                 const list = this.state.listDeleteBag[i]
                 const token = this.isLogin.token
-                const response = await axios({ method: 'delete', url: `http://localhost:9000/bag/${list}`, headers: { 'token': token } })
-                const { data } = response.data
+                await axios({ method: 'delete', url: `http://192.168.43.152:9000/bag/${list}`, headers: { 'token': token } })
+                // const { data } = response.data
                 this.getBag()
             }
         } catch (error) {
@@ -135,7 +135,7 @@ class Bag extends Component {
                                 :
                                 this.state.bagData.map((value, index) => {
                                     sum += value.product.price * value.qty
-                                    const checked = this.state.listDeleteBag.find((list, i) => list == value.id)
+                                    const checked = this.state.listDeleteBag.find((list, i) => list === value.id)
 
                                     return (<div key={index} className="card shadow-sm my-3 p-2 border-0">
                                         <div className="d-flex align-items-center">
@@ -144,7 +144,7 @@ class Bag extends Component {
                                                 <Checkbox checked={(!checked) ? "" : "checked"} id={value.id} callback={(e) => this.selectCardBag(e)} />
 
                                             </div>
-                                            <img src="./assets/img/kaos3.webp" alt="..." width={55} height={55} />
+                                            <img src={`http://192.168.43.152:9000/${value.product.image}`} alt="..." width={55} height={55} />
                                             <div className="mx-2 bag-title">
                                                 <h6 className="text-medium m-0">{value.product.name}</h6>
                                                 <small className="brand text-secondary">{value.product.brand}</small>

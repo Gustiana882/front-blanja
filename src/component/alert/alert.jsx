@@ -1,18 +1,23 @@
-import './alert.css'
+import React from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-const Alert = (props) => {
-    let display = props.message || false
+const Alert = () => {
     return (
-        <div className={(display) ? "alert-style d-flex" : "alert-style d-none"}>
-            <div className={`text-center alert alert-${props.type}`}>
-                <h6 className="fw-bold">{props.message}</h6>
-                <button 
-                className="btn btn-light btn-sm px-4" 
-                onClick={()=>{props.close(false)}}>close</button>
-            </div>
+        <div>
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     )
 }
 
-export default Alert;
+export default Alert

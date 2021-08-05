@@ -1,10 +1,12 @@
 import './header.css'
 import logo from '../../asset/logo.png'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import cookie from '../../helper/cookie'
+import Alert from '../alert/alert'
 
 const Header = (props) => (
     <div>
+        <Alert />
         <nav className="navbar navbar-expand-md navbar-light bg-light shadow-sm fixed-top">
             <div className="container justify-content-around">
                 <Link className="navbar-brand" to="/">
@@ -119,14 +121,14 @@ const Header = (props) => (
                                             data-bs-toggle="dropdown"
                                             aria-expanded="false"
                                         />
-                                        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                                             <li>
                                                 <Link className="dropdown-item" to="/dashboard">
                                                     Dashboard
                                                 </Link>
                                             </li>
                                             <li>
-                                                <button className="dropdown-item" onClick={() => { document.cookie = "false, ' '"; console.log(document.cookie); window.location.href = "/" }}>
+                                                <button className="dropdown-item" onClick={() => { document.cookie = "false, ' ', ' '"; console.log(document.cookie); window.location.href = "/" }}>
                                                     Checkout
                                                 </button>
                                             </li>
