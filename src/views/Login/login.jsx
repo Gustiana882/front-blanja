@@ -3,6 +3,8 @@ import { Link, Redirect, useHistory } from "react-router-dom"
 import logo from '../../asset/logo.png'
 import axios from 'axios';
 import cookie from '../../helper/cookie'
+import { toast } from 'react-toastify'
+import Alert from '../../component/alert/alert'
 
 class Login extends Component {
     constructor(props) {
@@ -19,19 +21,21 @@ class Login extends Component {
             method: 'post',
             url: 'http://192.168.43.152:9000/login',
             data: {
-                email: "emailTest@gmail.com",
-                password: "test1234",
+                email: this.state.email,
+                password: this.state.password,
             }
 
         })
             .then((response) => {
                 const res = response.data;
-                const token = res.data[0].token_key;
-                const image = `http://localhost:9000/${res.data[0].image}`;
-
+                console.log(res)
                 if (res.message == 'login berhasil!') {
+                    const token = res.data[0].token_key;
+                    const image = `http://localhost:9000/${res.data[0].image}`;
                     cookie.setCookie(true, token, image)
                     return this.props.history.goBack('/')
+                } else {
+                    toast.error(res.message)
                 }
             });
     }
@@ -51,6 +55,7 @@ class Login extends Component {
     render() {
         return (
             <div className="mt-4">
+                <Alert />
                 {(document.cookie.split(',')[0] === "true") ? <Redirect to="/" /> : ''}
                 <div className="container">
                     <div className="col-12 col-md-6 col-xl-4 mx-auto">
@@ -120,7 +125,7 @@ class Login extends Component {
                                     placeholder="email"
                                     autoComplete="off"
                                     onChange={this.formEmail}
-                                    value="emailTest@gmail.com"
+                                // value="emailTest@gmail.com"
                                 />
 
                             </div>
@@ -133,7 +138,7 @@ class Login extends Component {
                                     placeholder="password"
                                     autoComplete="off"
                                     onChange={this.formPassword}
-                                    value="o"
+                                // value="o"
                                 />
 
                             </div>
