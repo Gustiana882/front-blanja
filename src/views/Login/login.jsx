@@ -1,54 +1,66 @@
 import { Component } from 'react';
-import { Link, Redirect, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 import logo from '../../asset/logo.png'
 import axios from 'axios';
-import cookie from '../../helper/cookie'
 import { toast } from 'react-toastify'
 import Alert from '../../component/alert/alert'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import ActionsUser from '../../stores/action/userAction'
+import WithAuth from '../../utils/WithAuth';
 
 class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            email: null,
-            password: null,
+            loginForm: {},
         }
     }
 
+
+    getUser = (token) => {
+        axios({
+            method: 'get',
+            url: `${process.env.REACT_APP_DOMAIN}/profile`,
+            headers: { token }
+        }).then((response) => {
+            const { data } = response.data;
+            this.props.UserSet({
+                address: data[0].address,
+                email: data[0].email,
+                image: data[0].image,
+                name: data[0].name,
+                phone: data[0].phone,
+                roles: data[0].roles,
+            })
+        }).catch(error => toast.error(error.message))
+    }
+
+
     handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         axios({
             method: 'post',
-            url: 'http://192.168.43.152:9000/login',
-            data: {
-                email: this.state.email,
-                password: this.state.password,
+            url: `${process.env.REACT_APP_DOMAIN}/login`,
+            data: this.state.loginForm
+        }).then((response) => {
+            const res = response.data;
+            if (res.message === 'login berhasil!') {
+                const token = res.data[0].token_key;
+                this.getUser(token)
+                this.props.AuthSet(token)
+                return this.props.history.goBack('/')
+            } else {
+                return toast.error(res.message)
             }
-
-        })
-            .then((response) => {
-                const res = response.data;
-                console.log(res)
-                if (res.message == 'login berhasil!') {
-                    const token = res.data[0].token_key;
-                    const image = `http://localhost:9000/${res.data[0].image}`;
-                    cookie.setCookie(true, token, image)
-                    return this.props.history.goBack('/')
-                } else {
-                    toast.error(res.message)
-                }
-            });
+        }).catch(error => toast.error(error.message))
     }
 
-    formEmail = (e) => {
+    handleChange = (element) => {
+        const name = element.target.name
+        const value = element.target.value
         this.setState({
-            email: e.target.value
-        })
-    }
-
-    formPassword = (e) => {
-        this.setState({
-            password: e.target.value
+            loginForm: { ...this.state.loginForm, ...{ [name]: value } }
         })
     }
 
@@ -56,7 +68,6 @@ class Login extends Component {
         return (
             <div className="mt-4">
                 <Alert />
-                {(document.cookie.split(',')[0] === "true") ? <Redirect to="/" /> : ''}
                 <div className="container">
                     <div className="col-12 col-md-6 col-xl-4 mx-auto">
                         <div className="d-block d-md-none mb-5">
@@ -86,90 +97,72 @@ class Login extends Component {
                                 Please login with your account
                             </h6>
                         </div>
-                        <form onSubmit={this.handleSubmit}
-                            className="row g-3 needs-validation"
-                        >
-                            <div
-                                className="btn-group col-9 mx-auto mt-3 mb-5"
-                                role="group"
-                                aria-label="Basic radio toggle button group"
-                            >
-                                <input
-                                    type="radio"
-                                    className="btn-check"
-                                    name="btnradio"
-                                    id="btnradio1"
-                                    autoComplete="off"
-                                />
-                                <label className="btn btn-outline-danger col-6" htmlFor="btnradio1">
-                                    Custommer
-                                </label>
-                                <input
-                                    type="radio"
-                                    className="btn-check"
-                                    name="btnradio"
-                                    id="btnradio2"
-                                    autoComplete="off"
-                                    defaultChecked
-                                />
-                                <label className="btn btn-outline-danger col-6" htmlFor="btnradio2">
-                                    Seller
-                                </label>
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="col-12 d-flex justify-content-center">
+                                <div
+                                    className="btn-group col-8 mx-auto mt-3 mb-5"
+                                    role="group"
+                                    aria-label="Basic radio toggle button group" >
+                                    <input
+                                        type="radio"
+                                        className="btn-check"
+                                        name="btnradio"
+                                        id="btnradio1"
+                                        autoComplete="off"
+                                    />
+                                    <label className="btn btn-outline-danger col-6" htmlFor="btnradio1">
+                                        Custommer
+                                    </label>
+                                    <input
+                                        type="radio"
+                                        className="btn-check"
+                                        name="btnradio"
+                                        id="btnradio2"
+                                        autoComplete="off"
+                                        defaultChecked
+                                    />
+                                    <label className="btn btn-outline-danger col-6" htmlFor="btnradio2">
+                                        Seller
+                                    </label>
+                                </div>
                             </div>
-                            <div className="col-12">
-
+                            <div className="col-12 my-2">
                                 <input
                                     type="email"
+                                    name="email"
                                     className="form-control"
                                     required
                                     placeholder="email"
-                                    autoComplete="off"
-                                    onChange={this.formEmail}
-                                // value="emailTest@gmail.com"
+                                    autoComplete="true"
+                                    onChange={this.handleChange}
                                 />
-
                             </div>
-                            <div className="col-12">
-
+                            <div className="col-12 my-2">
                                 <input
                                     type="password"
+                                    name="password"
                                     className="form-control"
                                     required
                                     placeholder="password"
                                     autoComplete="off"
-                                    onChange={this.formPassword}
-                                // value="o"
+                                    onChange={this.handleChange}
                                 />
-
                             </div>
                             <Link to="/forgot-password" className="nav-link link-dark d-flex justify-content-end">
                                 <small>Forgot your password?</small>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width={16}
-                                    height={16}
-                                    fill="currentColor"
-                                    className="bi bi-arrow-right text-danger mt-1"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
-                                    />
+                                <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="currentColor" className="bi bi-arrow-right text-danger mt-1" viewBox="0 0 16 16" >
+                                    <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
                                 </svg>
-
                             </Link>
                             <div className="col-12 mt-4">
                                 <div className="d-grid gap-2">
-                                    <button
-                                        className="btn rounded-pill btn-danger text-white"
-                                        type="submit"
-                                    >
+                                    <button className="btn rounded-pill btn-danger text-white" type="submit">
                                         LOGIN
                                     </button>
                                 </div>
                             </div>
                         </form>
+                    <p className="text-center mb-5 mt-3"><small>Don't have a account?<Link to="/sign-up" className="text-danger">Register</Link></small></p>
                     </div>
                 </div>
             </div>
@@ -178,4 +171,18 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        AuthSet: bindActionCreators(ActionsUser.AuthSet, dispatch),
+        UserSet: bindActionCreators(ActionsUser.UserSet, dispatch),
+    }
+
+}
+
+export default WithAuth(connect(mapStateToProps, mapDispatchToProps)(Login))

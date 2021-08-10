@@ -1,18 +1,18 @@
-import Editor from '../../../component/text-editor/text-editor'
 import Header from '../../../component/header/header'
 import Sidebar from '../Sidebar/Sidebar'
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import cookie from '../../../helper/cookie'
 import Alert from '../../../component/alert/alert'
 import { toast } from 'react-toastify';
 import FormData from 'form-data'
 import ModalCategory from './ModalCategory'
+import Editor from '../../../component/text-editor/text-editor'
+import { connect } from 'react-redux'
 
-const Inventory = () => {
+const Inventory = (props) => {
     const [load, setLoad] = useState(false)
     const [category, setCategory] = useState([])
-    const [img, setImg] = useState("http://192.168.43.152:9000/public/images/blank.jpg")
+    const [img, setImg] = useState(`${process.env.REACT_APP_DOMAIN}/public/images/blank.jpg`)
     const [form, setform] = useState({
         category: '',
         description: "description",
@@ -24,7 +24,7 @@ const Inventory = () => {
     const getCategory = () => {
         axios({
             method: 'get',
-            url: 'http://192.168.43.152:9000/product/category',
+            url: `${process.env.REACT_APP_DOMAIN}/product/category`,
         }).then((result) => {
             if (!result.data.isError) {
                 return setCategory(result.data.data)
@@ -38,19 +38,15 @@ const Inventory = () => {
 
     useEffect(() => {
         getCategory()
-        return () => {
-            setLoad(false)
-        }
+        setLoad(false)
     }, [load])
+
 
     const handleInput = (event) => {
         const { name, value } = event.target
         setform({ ...form, [name]: value })
     }
 
-    const appendForm = () => {
-        
-    }
 
     const handleClickJual = async () => {
         const formData = new FormData()
@@ -65,9 +61,9 @@ const Inventory = () => {
         formData.append("image", form.image)
         axios({
             method: 'post',
-            url: 'http://192.168.43.152:9000/product',
+            url: `${process.env.REACT_APP_DOMAIN}/product`,
             headers: {
-                'token': cookie.getCookie().token,
+                'token': props.user.token,
                 'content-type': 'multipart/form-data',
             },
             data: formData
@@ -99,7 +95,7 @@ const Inventory = () => {
 
     return (
         <div className="d-flex" style={{ marginTop: '60px', backgroundColor: '#F1F1F1' }}>
-            <Header />
+            <Header propsHistory={props.history}/>
             <Sidebar />
             <Alert />
             <section className="vw-100">
@@ -135,12 +131,12 @@ const Inventory = () => {
                                 </label>
                                 <select className="form-select" name="category" onChange={handleInput}>
                                     <option value={-1}>category</option>
-                                    {category.map((val) => <option value={val.id}>{val.name}</option>)}
+                                    {category.map((val, i) => <option key={i} value={val.id}>{val.name}</option>)}
                                 </select>
                             </div>
                             <div className="my-auto">
                                 {/* <button className="btn btn-primary mt-3 ms-3">Add new</button> */}
-                                <ModalCategory callback={(e)=>setLoad(e)}/>
+                                <ModalCategory callback={setLoad}/>
                             </div>
                         </div>
                         
@@ -232,4 +228,10 @@ const Inventory = () => {
     )
 }
 
-export default Inventory
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(Inventory)

@@ -3,11 +3,11 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import FormData from 'form-data'
-import cookie from '../../../helper/cookie'
+import { connect } from 'react-redux'
 
 
 const ModalCategory = (props) => {
-    const [load, setLoad] = useState(false)
+    const [notif, setNotif] = useState('')
     const [category, setCategory] = useState([])
     const [form, setForm] = useState({ id: null })
     const [img, setImg] = useState("http://192.168.43.152:9000/public/images/blank.jpg")
@@ -31,12 +31,11 @@ const ModalCategory = (props) => {
 
     useEffect(() => {
         getCategory()
+        props.callback(notif)
         return () => {
-            props.callback(true)
-            setLoad(false)
-            console.log('useEffect')
+            setNotif('')
         }
-    }, [load])
+    }, [props, notif])
 
 
     const handleInput = (event) => {
@@ -70,14 +69,14 @@ const ModalCategory = (props) => {
             method: (form.id) ? "put" : "post",
             url: 'http://192.168.43.152:9000/product/category',
             headers: {
-                'token': cookie.getCookie().token,
+                'token': props.user.token,
                 'content-type': 'multipart/form-data',
             },
             data: formData
         }).then((result) => {
             if (!result.data.isError) {
                 toast.success(result.data.message)
-                setLoad(true)
+                setNotif('save change')
                 setForm({ id: null })
             }
             else {
@@ -100,12 +99,12 @@ const ModalCategory = (props) => {
             method: 'delete',
             url: `http://192.168.43.152:9000/product/category/${id}`,
             headers: {
-                'token': cookie.getCookie().token,
+                'token': props.user.token,
                 'content-type': 'multipart/form-data',
             },
         }).then((result) => {
             if (!result.data.isError) {
-                setLoad(true)
+                setNotif('category delete')
                 return toast.success(result.data.message)
             } else {
                 return toast.error(result.data.message)
@@ -227,4 +226,11 @@ const ModalCategory = (props) => {
     )
 }
 
-export default ModalCategory
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(ModalCategory)

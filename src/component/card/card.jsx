@@ -6,7 +6,7 @@ const Card = (props) => {
     return (
         <Link to={`/detail/${props.slug}`} className="link-secondary nav-link p-0">
             <div className="card shadow-sm h-100 border-0">
-                <img src={`http://192.168.43.152:9000/${props.image}`} className="card-img-top" alt="..." />
+                <img src={`${process.env.REACT_APP_DOMAIN}/${props.image}`} className="card-img-top" alt="..." />
                 <div className="card-body">
                     <h6 className="card-title text-medium">
                         {props.title}

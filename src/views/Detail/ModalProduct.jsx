@@ -2,13 +2,12 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import TextEditor from '../../../component/text-editor/text-editor'
+import TextEditor from '../../component/text-editor/text-editor'
 import FormData from 'form-data'
-import cookie from '../../../helper/cookie'
+import { connect } from 'react-redux'
 
 const ModalProduct = (props) => {
 
-    const [load, setLoad] = useState(false)
     const [category, setCategory] = useState([])
     const [form, setForm] = useState({})
     const [img, setImg] = useState("http://192.168.43.152:9000/public/images/blank.jpg")
@@ -30,10 +29,6 @@ const ModalProduct = (props) => {
 
     useEffect(() => {
         getCategory()
-        console.log('useEfect')
-        return () => {
-            setLoad(false)
-        }
     }, [props])
 
     const handleInput = (event) => {
@@ -84,14 +79,13 @@ const ModalProduct = (props) => {
             method: "put",
             url: 'http://192.168.43.152:9000/product',
             headers: {
-                'token': cookie.getCookie().token,
+                'token': props.user.token,
                 'content-type': 'multipart/form-data',
             },
             data: formdata
         }).then((result) => {
             if (!result.data.isError) {
                 toast.success(result.data.message)
-                setLoad(true)
                 setForm({})
             }
             else {
@@ -106,18 +100,20 @@ const ModalProduct = (props) => {
     return (
         <div>
             {/* Button trigger modal */}
-            <Link
-                type="button"
-                className="badge bg-primary px-3 nav-link link-light"
-                data-bs-toggle="modal"
-                data-bs-target={`#modal-${props.productData.id}`}
-                onClick={openModal}
-            >
-                edit
-            </Link>
+            {(props.user.data.roles === 'admin')?
+                <Link
+                    type="button"
+                    className="btn btn-sm rounded-pill px-4 btn-outline-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target={`#modal-${props.productData.id}`}
+                    onClick={openModal}
+                    >
+                    edit
+                </Link>
+            : ''}
             {/* Modal */}
             <div
-                className="modal fade"
+                className="modal fade "
                 id={`modal-${props.productData.id}`}
                 tabIndex={-1}
                 aria-labelledby="exampleModalLabel"
@@ -241,4 +237,11 @@ const ModalProduct = (props) => {
     )
 }
 
-export default ModalProduct
+
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+export default connect(mapStateToProps)(ModalProduct)

@@ -1,19 +1,15 @@
 import { Component } from "react";
 import Header from '../../component/header/header';
-import { Link } from 'react-router-dom'
 import './Bag.css'
 import BtnQty from '../../component/btn-qty/btn-qty'
 import axios from 'axios';
-import cookie from '../../helper/cookie'
 import Checkbox from '../../component/checkbox/checkbox'
+import { connect } from 'react-redux'
+import WhitAuth from '../../utils/WithAuth'
 
 class Bag extends Component {
     constructor(props) {
         super(props)
-        this.isLogin = cookie.getCookie()
-        if (!this.isLogin) {
-            return window.location.pathname = '/login'
-        }
         this.state = {
             message: '',
             bagData: [],
@@ -23,13 +19,15 @@ class Bag extends Component {
 
     getBag = async () => {
         try {
-            const token = this.isLogin.token
-            const response = await axios({ method: 'get', url: 'http://192.168.43.152:9000/bag', headers: { 'token': token } })
+            const token = this.props.user.token
+            const response = await axios({ 
+                method: 'get', 
+                url: 'http://192.168.43.152:9000/bag', 
+                headers: { 'token': token } })
             const { data } = response.data
             this.setState({
                 message: response.data.message,
-                bagData: data
-            })
+                bagData: data })
         } catch (error) {
             console.log(error)
         }
@@ -40,40 +38,37 @@ class Bag extends Component {
     }
 
     setQty = async (id, qty) => {
-        // console.log(id)
-        // console.log(qty)
         try {
-            const token = this.isLogin.token
-            const response = await axios({
+            const token = this.props.user.token
+            axios({
                 method: 'put',
                 url: 'http://192.168.43.152:9000/bag',
                 headers: { 'token': token },
-                data: {
+                data: { 
                     id: id,
                     qty: qty,
                 }
             })
             this.getBag()
-            // console.log(response)
         } catch (error) {
-            console.log(error)
+            // console.log(error)
         }
     }
 
     rupiah = (number) => {
         return `Rp ${new Intl.NumberFormat("id-ID", {
-            //   style: "currency",
             currency: "IDR"
         }).format(number)}`;
     }
 
     selectCardBag = (id) => {
         const list = this.state.listDeleteBag
-        const findId = list.find((val, i) => val == id)
+        const findId = list.find((val, i) => val === id)
         if (findId) {
             const del = list.filter((val) => val !== id)
             return this.setState({ listDeleteBag: del })
-        } else if (list.length <= 1) {
+        } 
+        else if (list.length <= 1) {
             return this.setState({ listDeleteBag: [...list, ...[id]] })
         }
         else {
@@ -91,7 +86,7 @@ class Bag extends Component {
         try {
             for (let i = 0; i < this.state.listDeleteBag.length; i++) {
                 const list = this.state.listDeleteBag[i]
-                const token = this.isLogin.token
+                const token = this.props.user.token
                 await axios({ method: 'delete', url: `http://192.168.43.152:9000/bag/${list}`, headers: { 'token': token } })
                 // const { data } = response.data
                 this.getBag()
@@ -106,7 +101,7 @@ class Bag extends Component {
         // console.log(this.state.message)
         return (
             <div>
-                <Header callback={this.search} />
+                <Header propsHistory={this.props.history} />
                 <section className="container container-bag">
                     <div className="row">
                         <div className="mt-5">
@@ -141,7 +136,7 @@ class Bag extends Component {
                                         <div className="d-flex align-items-center">
                                             <div className="form-check d-flex justify-content-center align-items-center me-2">
 
-                                                <Checkbox checked={(!checked) ? "" : "checked"} id={value.id} callback={(e) => this.selectCardBag(e)} />
+                                                <Checkbox checked={(!checked) ? "" : "checked"} id={value.id} callback={this.selectCardBag} />
 
                                             </div>
                                             <img src={`http://192.168.43.152:9000/${value.product.image}`} alt="..." width={55} height={55} />
@@ -179,4 +174,11 @@ class Bag extends Component {
     }
 }
 
-export default Bag;
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+export default WhitAuth(connect(mapStateToProps)(Bag));

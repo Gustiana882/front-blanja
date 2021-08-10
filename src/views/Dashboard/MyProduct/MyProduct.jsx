@@ -6,11 +6,9 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import Rupiah from '../../../helper/rupiah'
 import { useEffect } from 'react'
-import cookie from '../../../helper/cookie'
-import ModalProduct from './ModalProduct'
+import { connect } from 'react-redux'
 
-
-const MyProduct = () => {
+const MyProduct = (props) => {
  
     const [load, setLoad] = useState(false)
     const [product, setProduct] = useState([])
@@ -36,7 +34,7 @@ const MyProduct = () => {
             method: 'delete',
             url: `http://192.168.43.152:9000/product/${id}`,
             headers: {
-                'token': cookie.getCookie().token,
+                'token': props.user.token,
                 'content-type': 'multipart/form-data',
             },
         }).then((result) => {
@@ -60,7 +58,7 @@ const MyProduct = () => {
 
     return (
         <div className="d-flex" style={{ marginTop: '60px', backgroundColor: '#F1F1F1' }}>
-            <Header />
+            <Header propsHistory={props.history} />
             <Sidebar />
             <section className="vh-100 vw-100">
                 <div className="card m-4 p-3">
@@ -127,7 +125,7 @@ const MyProduct = () => {
                                                 </div>
                                                 <div className="col">
                                                     <Link onClick={() => deleteProduct(product.id)} className="badge bg-danger nav-link link-light me-2">delete</Link>
-                                                    <ModalProduct productData={product} />
+                                                    {/* <ModalProduct productData={product} /> */}
                                                 </div>
                                             </div>
                                         )
@@ -142,4 +140,11 @@ const MyProduct = () => {
     )
 }
 
-export default MyProduct
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(MyProduct)

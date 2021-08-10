@@ -1,57 +1,40 @@
 import './header.css'
 import logo from '../../asset/logo.png'
 import { Link } from 'react-router-dom'
-import cookie from '../../helper/cookie'
 import Alert from '../alert/alert'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { toast } from 'react-toastify'
+import { connect } from 'react-redux'
+import {useState} from 'react'
+import ModalFilter from '../modalFilter/modalFilter'
 
 const Header = (props) => {
-    const [profile, setProfile] = useState([])
-    
-    const getProfile = () => {
-        axios({
-            method: 'get',
-            url: 'http://192.168.43.152:9000/profile',
-            headers: {
-                'token': cookie.getCookie().token,
-                'content-type': 'multipart/form-data',
-            },
-        }).then((result) => {
-            if (!result.data.isError) {
-                return setProfile(result.data.data)
-            } else {
-                return toast.error(result.data.message)
-            }
-        }).catch((error) => {
-            console.log(error)
-        })
+    const {data} = props.user
+    const searchView = props.propsHistory
+    const [handleChange, sethandleChange] = useState('')
+
+    const Search = (e) => {
+        e.preventDefault()
+        searchView.push(`/search?p=${handleChange}`)
     }
 
-    console.log(profile)
 
-
-    useEffect(()=>{
-        getProfile()
-    }, [])
     return (
         <div>
             <Alert />
-            <nav className="navbar navbar-expand-md navbar-light bg-light shadow-sm fixed-top">
+            <ModalFilter />
+            <nav className="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
                 <div className="container justify-content-around">
                     <Link className="navbar-brand" to="/">
                         <img src={logo} alt="logo.png" width={90} height={35} />
                     </Link>
                     <div className="collapse navbar-collapse justify-content-between">
-                        <form className="search ms-auto" onSubmit={(e) => e.preventDefault()}>
+                        <form className="search ms-auto" onSubmit={Search}>
                             <div className="input-group">
                                 <input
                                     className="form-control form-control-sm rounded-pill px-3"
                                     type="search"
                                     placeholder="Search"
                                     aria-label="Search"
-                                    onChange={props.callback}
+                                    onChange={(e) => sethandleChange(e.target.value)}
                                 />
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +52,7 @@ const Header = (props) => {
                         <button
                             className="btn btn-outline-secondary btn-sm rounded px-1 pt-1 mx-4 me-auto"
                             data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
+                            data-bs-target="#modalFilter"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +87,7 @@ const Header = (props) => {
                                 </Link>
                             </li>
                             {
-                                (!cookie.getCookie()) ?
+                                (!props.user.isAuth) ?
                                     <li className="nav-item d-flex">
                                         <Link className="nav-link link-light btn btn-danger btn-sm rounded-pill px-4 py-1 me-1" to="/login">
                                             Login
@@ -144,7 +127,7 @@ const Header = (props) => {
                                         <div className="dropdown">
                                             <img
                                                 className="rounded-circle dropdown-toggle"
-                                                src="http://localhost:3000/assets/img/christian-buehner-DItYlc26zVI-unsplash 1.png"
+                                                src={`http://localhost:9000/${data.image}`}
                                                 alt=""
                                                 width={30}
                                                 height={30}
@@ -154,13 +137,13 @@ const Header = (props) => {
                                             />
                                             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                                                 <li>
-                                                    <Link className="dropdown-item" to="/profile">
+                                                    <Link className="dropdown-item" to="/profile-user">
                                                         Profile
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <button className="dropdown-item" onClick={() => { document.cookie = "false, ' ', ' '"; console.log(document.cookie); window.location.href = "/" }}>
-                                                        Checkout
+                                                    <button className="dropdown-item" onClick={props.logOut}>
+                                                        Logout
                                                     </button>
                                                 </li>
                                             </ul>
@@ -289,4 +272,16 @@ const Header = (props) => {
     )
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logOut: () => dispatch({type: 'UNSET_AUTH'})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
