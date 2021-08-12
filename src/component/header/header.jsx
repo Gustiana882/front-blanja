@@ -3,11 +3,11 @@ import logo from '../../asset/logo.png'
 import { Link } from 'react-router-dom'
 import Alert from '../alert/alert'
 import { connect } from 'react-redux'
-import {useState} from 'react'
+import { useState } from 'react'
 import ModalFilter from '../modalFilter/modalFilter'
 
 const Header = (props) => {
-    const {data} = props.user
+    const { data } = props.user
     const searchView = props.propsHistory
     const [handleChange, sethandleChange] = useState('')
 
@@ -20,7 +20,7 @@ const Header = (props) => {
     return (
         <div>
             <Alert />
-            <ModalFilter />
+            <ModalFilter propsHistory={props.propsHistory} />
             <nav className="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
                 <div className="container justify-content-around">
                     <Link className="navbar-brand" to="/">
@@ -137,9 +137,15 @@ const Header = (props) => {
                                             />
                                             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                                                 <li>
-                                                    <Link className="dropdown-item" to="/profile-user">
-                                                        Profile
-                                                    </Link>
+                                                    {(data.roles === 'customer') ?
+                                                        <Link className="dropdown-item" to="/profile-user">
+                                                            Profile
+                                                        </Link>
+                                                        :
+                                                        <Link className="dropdown-item" to="/profile-store">
+                                                            Profile
+                                                        </Link>
+                                                    }
                                                 </li>
                                                 <li>
                                                     <button className="dropdown-item" onClick={props.logOut}>
@@ -280,7 +286,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        logOut: () => dispatch({type: 'UNSET_AUTH'})
+        logOut: () => dispatch({ type: 'UNSET_AUTH' })
     }
 }
 

@@ -4,7 +4,7 @@ import Star from '../star/star'
 import Rupiah from '../../helper/rupiah'
 const Card = (props) => {
     return (
-        <Link to={`/detail/${props.slug}`} className="link-secondary nav-link p-0">
+        <Link to={`/detail/${props.slug}`} className="link-secondary nav-link p-0 h-100">
             <div className="card shadow-sm h-100 border-0">
                 <img src={`${process.env.REACT_APP_DOMAIN}/${props.image}`} className="card-img-top" alt="..." />
                 <div className="card-body">

@@ -96,11 +96,11 @@ const ModalProduct = (props) => {
         })
     }
 
-
+    console.log(props.productData.id_user)
     return (
         <div>
             {/* Button trigger modal */}
-            {(props.user.data.roles === 'admin')?
+            {(props.user.data.roles === 'seller' && props.user.data.email === props.productData.id_user)?
                 <Link
                     type="button"
                     className="btn btn-sm rounded-pill px-4 btn-outline-danger"

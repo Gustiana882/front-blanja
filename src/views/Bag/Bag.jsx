@@ -98,7 +98,7 @@ class Bag extends Component {
 
     render(props) {
         let sum = 0;
-        // console.log(this.state.message)
+        console.log(this.props.user.token)
         return (
             <div>
                 <Header propsHistory={this.props.history} />

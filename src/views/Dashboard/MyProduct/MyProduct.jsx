@@ -17,7 +17,11 @@ const MyProduct = (props) => {
     const getProduct = () => {
         axios({
             method: 'get',
-            url: 'http://192.168.43.152:9000/product',
+            url: 'http://192.168.43.152:9000/product/my-product',
+            headers: {
+                'token': props.user.token,
+                'content-type': 'multipart/form-data',
+            },
         }).then((result) => {
             if (!result.data.isError) {
                 return setProduct(result.data.data)
@@ -54,6 +58,7 @@ const MyProduct = (props) => {
         return () => {
             setLoad(false)
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [load])
 
     return (

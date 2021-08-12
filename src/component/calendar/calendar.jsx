@@ -23,9 +23,10 @@ const Calendar = (props) => {
     },[props])
 
 
-    useEffect(()=>{
-        props.onChange(form)
-    }, [])
+    // useEffect(()=>{
+    //     props.onChange(form)
+    //     console.log('useEffect')
+    // }, [props])
 
 
     let optionsDay = []

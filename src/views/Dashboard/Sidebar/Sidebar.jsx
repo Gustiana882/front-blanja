@@ -34,7 +34,7 @@ const Sidebar = (props) => {
                     </div>
                 </div>
                 <ul className="nav nav-pills flex-column mb-auto">
-                    {(data.roles === 'admin') ?
+                    {(data.roles === 'seller') ?
                         <li>
                             <Link to='/' className="nav-link link-dark">
                                 <div className="dropdown">
@@ -73,7 +73,7 @@ const Sidebar = (props) => {
                             </Link>
                         </li>
                         : ''}
-                    {(data.roles === 'admin') ?
+                    {(data.roles === 'seller') ?
                         <li>
                             <Link to='/' className="nav-link link-dark">
                                 <div className="dropdown">
@@ -118,7 +118,7 @@ const Sidebar = (props) => {
                             </Link>
                         </li>
                         : ''}
-                    {(data.roles === 'admin') ?
+                    {(data.roles === 'seller') ?
                         <li>
                             <Link to='/' className="nav-link link-dark">
                                 <div className="dropdown">
@@ -168,7 +168,7 @@ const Sidebar = (props) => {
                             </Link>
                         </li>
                         : ''}
-                    {(['user'].find(roles => roles === data.roles)) ?
+                    {(['customer'].find(roles => roles === data.roles)) ?
                         <>
                             <li>
                                 <Link to='/' className="nav-link link-dark">

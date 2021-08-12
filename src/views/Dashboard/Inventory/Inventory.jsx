@@ -73,6 +73,13 @@ const Inventory = (props) => {
             }
             else {
                 toast.success(result.data.message)
+                setform({
+                    category: '',
+                    description: "description",
+                    condition: "New",
+                    review: 20,
+                    star: 4,
+                });
             }
         }).catch((error) => {
             console.log(error)

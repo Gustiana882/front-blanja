@@ -3,13 +3,17 @@ import axios from 'axios'
 import './modalFilter.css'
 
 
-const ModalFilter = () => {
+const ModalFilter = (props) => {
 
-    const [formFilter, setformFilter] = useState()
+    const [formFilter, setformFilter] = useState({
+        name: 'ASC',
+        category: 'All',
+        price: '',
+    })
     const [category, setCategory] = useState([])
 
     const handleClick = () => {
-        console.log('ok')
+        props.propsHistory.push(`/filter?name=${formFilter.name}&category=${formFilter.category}&price=${formFilter.price}`)
     }
 
 
@@ -33,8 +37,6 @@ const ModalFilter = () => {
         const value = element.target.value
         setformFilter({...formFilter, ...{ [name]: value }})
     }
-
-    console.log(formFilter)
 
 
     return (
@@ -80,65 +82,7 @@ const ModalFilter = () => {
                             </div>
                         </div>
                         <div className="modal-body modal-filter">
-                            <div className="m-4 colors">
-                                <h5 className="text-medium">Colors</h5>
-                                <div className="form-check form-check-inline p-0 m-0">
-                                    <input
-                                        className="color1"
-                                        type="checkbox"
-                                        name="exampleRadios"
-                                        id="exampleRadios1"
-                                        defaultValue="option1"
-                                        defaultChecked
-                                    />
-                                </div>
-                                <div className="form-check form-check-inline p-0 m-0">
-                                    <input
-                                        className="color2"
-                                        type="checkbox"
-                                        name="exampleRadios"
-                                        id="exampleRadios2"
-                                        defaultValue="option2"
-                                    />
-                                </div>
-                                <div className="form-check form-check-inline p-0 m-0">
-                                    <input
-                                        className="color3"
-                                        type="checkbox"
-                                        name="exampleRadios"
-                                        id="exampleRadios2"
-                                        defaultValue="option2"
-                                    />
-                                </div>
-                                <div className="form-check form-check-inline p-0 m-0">
-                                    <input
-                                        className="color4"
-                                        type="checkbox"
-                                        name="exampleRadios"
-                                        id="exampleRadios2"
-                                        defaultValue="option2"
-                                    />
-                                </div>
-                                <div className="form-check form-check-inline p-0 m-0">
-                                    <input
-                                        className="color5"
-                                        type="checkbox"
-                                        name="exampleRadios"
-                                        id="exampleRadios2"
-                                        defaultValue="option2"
-                                    />
-                                </div>
-                                <div className="form-check form-check-inline p-0 m-0">
-                                    <input
-                                        className="color6"
-                                        type="checkbox"
-                                        name="exampleRadios"
-                                        id="exampleRadios2"
-                                        defaultValue="option2"
-                                    />
-                                </div>
-                            </div>
-                            <hr />
+                            
                             <div className="m-4 size">
                                 <h5 className="text-medium">Sizes</h5>
                                 <div className="d-flex">
@@ -146,52 +90,35 @@ const ModalFilter = () => {
                                         <input
                                             className
                                             type="checkbox"
-                                            name="exampleRadios"
+                                            name="name"
                                             id="exampleRadios1"
-                                            defaultValue="option1"
+                                            value="ASC"
                                             defaultChecked
+                                            onChange={handleChange}
                                         />
-                                        <span>XS</span>
+                                        <span>A-Z</span>
                                     </div>
                                     <div className="form-check p-0 m-0">
                                         <input
                                             className
                                             type="checkbox"
-                                            name="exampleRadios"
+                                            name="name"
                                             id="exampleRadios2"
-                                            defaultValue="option2"
+                                            value="DESC"
+                                            onChange={handleChange}
                                         />
-                                        <span>S</span>
+                                        <span>Z-A</span>
                                     </div>
                                     <div className="form-check p-0 m-0">
                                         <input
                                             className
                                             type="checkbox"
-                                            name="exampleRadios"
+                                            name="price"
                                             id="exampleRadios2"
-                                            defaultValue="option2"
+                                            value="DESC"
+                                            onChange={handleChange}
                                         />
-                                        <span>M</span>
-                                    </div>
-                                    <div className="form-check p-0 m-0">
-                                        <input
-                                            className
-                                            type="checkbox"
-                                            name="exampleRadios"
-                                            id="exampleRadios2"
-                                            defaultValue="option2"
-                                        />
-                                        <span>L</span>
-                                    </div>
-                                    <div className="form-check p-0 m-0">
-                                        <input
-                                            className
-                                            type="checkbox"
-                                            name="exampleRadios"
-                                            id="exampleRadios2"
-                                            defaultValue="option2"
-                                        />
-                                        <span>XL</span>
+                                        <span>0 - 1.000.000</span>
                                     </div>
                                 </div>
                             </div>
@@ -202,10 +129,11 @@ const ModalFilter = () => {
                                     <div className="form-check p-0 m-0">
                                         <input
                                             type="checkbox"
-                                            name="exampleRadios"
+                                            name="category"
                                             id="exampleRadios1"
-                                            defaultValue="option1"
+                                            value="All"
                                             defaultChecked
+                                            onChange={handleChange}
                                         />
                                         <span>All</span>
                                     </div>
@@ -215,7 +143,6 @@ const ModalFilter = () => {
                                                 type="checkbox"
                                                 name="category"
                                                 id="exampleRadios2"
-                                                defaultValue="option2"
                                                 value={value.name}
                                                 onChange={handleChange}
                                             />
@@ -223,16 +150,6 @@ const ModalFilter = () => {
                                         </div>
                                     )}
                                 </div>
-                            </div>
-                            <hr />
-                            <div className="m-4">
-                                <h5 className="text-medium">Brand</h5>
-                                <select className="form-select" aria-label="Default select example">
-                                    <option selected>Brand</option>
-                                    <option value={1}>Adidas Originals</option>
-                                    <option value={2}>Jack &amp; Jones</option>
-                                    <option value={3}>s.Oliver</option>
-                                </select>
                             </div>
                         </div>
                         <div className="modal-footer justify-content-around">
@@ -246,6 +163,7 @@ const ModalFilter = () => {
                             <button
                                 type="button"
                                 className="col-5 btn btn-danger rounded-pill px-4"
+                                data-bs-dismiss="modal"
                                 onClick={handleClick}
                             >
                                 Apply

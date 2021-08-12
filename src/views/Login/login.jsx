@@ -13,7 +13,9 @@ class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loginForm: {},
+            loginForm: {
+                btnradio: "customer"
+            },
         }
     }
 
@@ -21,7 +23,7 @@ class Login extends Component {
     getUser = (token) => {
         axios({
             method: 'get',
-            url: `${process.env.REACT_APP_DOMAIN}/profile`,
+            url: `${process.env.REACT_APP_DOMAIN}/profile/${this.state.loginForm.btnradio}`,
             headers: { token }
         }).then((response) => {
             const { data } = response.data;
@@ -39,10 +41,14 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        console.log('ok')
         axios({
             method: 'post',
-            url: `${process.env.REACT_APP_DOMAIN}/login`,
-            data: this.state.loginForm
+            url: `${process.env.REACT_APP_DOMAIN}/login/${this.state.loginForm.btnradio}`,
+            data: {
+                email: this.state.loginForm.email,
+                password: this.state.loginForm.password,
+            }
         }).then((response) => {
             const res = response.data;
             if (res.message === 'login berhasil!') {
@@ -109,6 +115,9 @@ class Login extends Component {
                                         name="btnradio"
                                         id="btnradio1"
                                         autoComplete="off"
+                                        value="customer"
+                                        defaultChecked
+                                        onChange={this.handleChange}
                                     />
                                     <label className="btn btn-outline-danger col-6" htmlFor="btnradio1">
                                         Custommer
@@ -119,7 +128,8 @@ class Login extends Component {
                                         name="btnradio"
                                         id="btnradio2"
                                         autoComplete="off"
-                                        defaultChecked
+                                        value="seller"
+                                        onChange={this.handleChange}
                                     />
                                     <label className="btn btn-outline-danger col-6" htmlFor="btnradio2">
                                         Seller

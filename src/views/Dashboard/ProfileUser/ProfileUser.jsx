@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Header from '../../../component/header/header';
 import Sidebar from "../Sidebar/Sidebar";
 import { useState, useEffect } from 'react'
@@ -10,8 +11,6 @@ import Calendar from '../../../component/calendar/calendar';
 
 const ProfileUser = (props) => {
 
-    const [viewCalendar, setviewCalendar] = useState('d-none')
-    const [calendar, setcalendar] = useState(new Date())
     const [imageProfile, setimageProfile] = useState('')
     const [formProfile, setformProfile] = useState({
         name: '',
@@ -22,7 +21,7 @@ const ProfileUser = (props) => {
     const getProfile = () => {
         axios({
             method: 'get',
-            url: `${process.env.REACT_APP_DOMAIN}/profile`,
+            url: `${process.env.REACT_APP_DOMAIN}/profile/${props.user.data.roles}`,
             headers: {
                 'token': props.user.token,
                 'content-type': 'multipart/form-data',
@@ -51,7 +50,6 @@ const ProfileUser = (props) => {
         setformProfile({...formProfile, ...{ dateBirth: DateBirth }})
     }
 
-    console.log(formProfile)
 
     const fileChange = (event) => {
         const file = event.target.files[0];
@@ -67,9 +65,6 @@ const ProfileUser = (props) => {
         }
     }
 
-    useEffect(() => {
-        setviewCalendar('d-none')
-    }, [calendar])
 
     useEffect(() => {
         getProfile()
@@ -87,7 +82,7 @@ const ProfileUser = (props) => {
         formData.append('image', formProfile.image)
         axios({
             method: "put",
-            url: `${process.env.REACT_APP_DOMAIN}/profile/edit-profile`,
+            url: `${process.env.REACT_APP_DOMAIN}/profile/${props.user.data.roles}/edit-profile`,
             data: formData,
             headers: {
                 'token': props.user.token,

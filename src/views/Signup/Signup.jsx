@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import logo from '../../asset/logo.png'
 import { useState } from 'react'
 import withAuth from '../../utils/WithAuth'
-import FormData from 'form-data'
 import React from 'react'
 import Axios from 'axios'
 import { toast } from 'react-toastify'
@@ -15,8 +14,7 @@ const Signup = () => {
         email: '',
         password: '',
         repeatPassword: '',
-        address: '',
-        phone: '',
+        btnradio: "customer",
     })
 
     const [error, setError] = useState('')
@@ -32,7 +30,7 @@ const Signup = () => {
     const checkInputPassword = () => {
         const password = formSignUp.password
         const repeatPassword = formSignUp.repeatPassword
-        if (password.length < 8) {
+        if (password.length <= 8) {
             setError('was-validated')
             return console.log('pasword harus lebih dari 8 karakter')
         }
@@ -47,27 +45,43 @@ const Signup = () => {
         return console.log('ok')
     }
 
+    const formData = () => {
+        let formData;
+        if (formSignUp.btnradio === 'customer') {
+            formData = {
+                name: formSignUp.name,
+                email: formSignUp.email,
+                password: formSignUp.password
+            }
+        } else {
+            formData = {
+                name: formSignUp.name,
+                email: formSignUp.email,
+                password: formSignUp.password,
+                phone: formSignUp.phone,
+                store: formSignUp.store,
+            }
+        }
+        return formData;
+    }
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
         checkInputPassword()
-        let formData = new FormData()
-        formData.append('name', formSignUp.name)
-        formData.append('email', formSignUp.email)
-        formData.append('phone', formSignUp.phone)
-        formData.append('address', formSignUp.address)
-        formData.append('password', formSignUp.password)
 
         Axios({
             method: 'post',
-            url: `${process.env.REACT_APP_DOMAIN}/register`,
-            data: formData,
+            url: `${process.env.REACT_APP_DOMAIN}/register/${formSignUp.btnradio}`,
+            headers: {
+                'content-type': 'application/json',
+            },
+            data: formData(),
         }).then(res => toast.success(res.data.message))
-          .catch(error => toast.error(error.message))
+            .catch(error => toast.error(error.message))
 
     }
 
-    console.log(formSignUp)
     return (
         <div className="bg-white">
             <Alert />
@@ -112,6 +126,9 @@ const Signup = () => {
                                     name="btnradio"
                                     id="btnradio1"
                                     autoComplete="off"
+                                    value="customer"
+                                    defaultChecked
+                                    onChange={handleChange}
                                 />
                                 <label className="btn btn-outline-danger col-6" htmlFor="btnradio1">
                                     Custommer
@@ -122,7 +139,8 @@ const Signup = () => {
                                     name="btnradio"
                                     id="btnradio2"
                                     autoComplete="off"
-                                    defaultChecked
+                                    value="seller"
+                                    onChange={handleChange}
                                 />
                                 <label className="btn btn-outline-danger col-6" htmlFor="btnradio2">
                                     Seller
@@ -151,28 +169,32 @@ const Signup = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className="col-12 my-3">
-                            <input
-                                type="number"
-                                name="phone"
-                                className="form-control"
-                                required
-                                placeholder="phone"
-                                autoComplete="off"
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="col-12 my-3">
-                            <input
-                                type="text"
-                                name="address"
-                                className="form-control"
-                                required
-                                placeholder="address"
-                                autoComplete="off"
-                                onChange={handleChange}
-                            />
-                        </div>
+                        {(formSignUp.btnradio === 'customer') ? '' :
+                            <>
+                                <div className="col-12 my-3">
+                                    <input
+                                        type="number"
+                                        name="phone"
+                                        className="form-control"
+                                        required
+                                        placeholder="Phone number"
+                                        autoComplete="off"
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className="col-12 my-3">
+                                    <input
+                                        type="text"
+                                        name="store"
+                                        className="form-control"
+                                        required
+                                        placeholder="Store name"
+                                        autoComplete="off"
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                            </>
+                        }
                         <div className="col-12 my-3">
                             <input
                                 type="password"

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Header from '../../../component/header/header';
 import Sidebar from "../Sidebar/Sidebar";
 import { useState, useEffect } from 'react'
@@ -6,12 +7,10 @@ import { toast } from 'react-toastify'
 import { connect } from 'react-redux'
 import './profile.css'
 import FormData from 'form-data'
-import Calendar from '../../../component/calendar/calendar';
+// import Calendar from '../../../component/calendar/calendar';
 
 const ProfileStore = (props) => {
 
-    const [viewCalendar, setviewCalendar] = useState('d-none')
-    const [calendar, setcalendar] = useState(new Date())
     const [imageProfile, setimageProfile] = useState('')
     const [formProfile, setformProfile] = useState({
         name: '',
@@ -22,7 +21,7 @@ const ProfileStore = (props) => {
     const getProfile = () => {
         axios({
             method: 'get',
-            url: `${process.env.REACT_APP_DOMAIN}/profile`,
+            url: `${process.env.REACT_APP_DOMAIN}/profile/${props.user.data.roles}`,
             headers: {
                 'token': props.user.token,
                 'content-type': 'multipart/form-data',
@@ -46,11 +45,6 @@ const ProfileStore = (props) => {
         setformProfile({ ...formProfile, ...{ [name]: value } })
     }
 
-    const handleBirth = (date) => {
-        const DateBirth = `${date.day}-${date.moon}-${date.year}`
-        setformProfile({...formProfile, ...{ dateBirth: DateBirth }})
-    }
-
     console.log(formProfile)
 
     const fileChange = (event) => {
@@ -66,10 +60,6 @@ const ProfileStore = (props) => {
             reader.readAsDataURL(file);
         }
     }
-
-    useEffect(() => {
-        setviewCalendar('d-none')
-    }, [calendar])
 
     useEffect(() => {
         getProfile()
@@ -114,10 +104,10 @@ const ProfileStore = (props) => {
                             <div className="col-sm-8">
                                 <div className="mb-3 row">
                                     <label htmlFor="store-name" className="col-sm-4 col-form-label">
-                                        <p className="text-muted"><small>Name</small></p>
+                                        <p className="text-muted"><small>Store Name</small></p>
                                     </label>
                                     <div className="col-sm-7">
-                                        <input type="text" className="form-control" name="name" onChange={handleChange} value={formProfile.name} />
+                                        <input type="text" className="form-control" name="name" onChange={handleChange} value={formProfile.store} />
                                     </div>
                                 </div>
                                 <div className="mb-3 row">
@@ -135,6 +125,14 @@ const ProfileStore = (props) => {
                                     </label>
                                     <div className="col-sm-7">
                                         <input type="number" className="form-control" name="phone" onChange={handleChange} value={formProfile.phone} />
+                                    </div>
+                                </div>
+                                <div className="mb-3 row">
+                                    <label htmlFor="phone-number" className="col-sm-4 col-form-label" >
+                                        <p className="text-muted"><small>Description</small></p>
+                                    </label>
+                                    <div className="col-sm-7">
+                                        <input type="text" className="form-control" name="phone" onChange={handleChange} value={formProfile.description} />
                                     </div>
                                 </div>
                             </div>

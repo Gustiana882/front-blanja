@@ -8,17 +8,29 @@ import Card from '../../component/card/card'
 const ViewProduct = (props) => {
     const GetQueryParam = key => new URLSearchParams(useLocation().search).get(key)
     const product = GetQueryParam('p')
+    const name = GetQueryParam('name')
+    const category = GetQueryParam('category')
+    const price = GetQueryParam('price')
     const [searchResult, setsearchResult] = useState([])
 
     const searchProduct = () => {
-        Axios({
-            method: 'get',
-            url: `${process.env.REACT_APP_DOMAIN}/product/search?p=${product}`
-        }).then(result => setsearchResult(result.data.data))
+        if (props.history.location.pathname === '/filter') {
+            Axios({
+                method: 'get',
+                url: `${process.env.REACT_APP_DOMAIN}/product/filter?name=${name}&category=${category}&price${price}`
+            }).then(result => setsearchResult(result.data.data))
+        } else {
+            Axios({
+                method: 'get',
+                url: `${process.env.REACT_APP_DOMAIN}/product/search?p=${product}`
+            }).then(result => setsearchResult(result.data.data))
+        }
     }
+
 
     useEffect(() => {
         searchProduct()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props])
 
 

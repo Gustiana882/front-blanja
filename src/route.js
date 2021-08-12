@@ -25,6 +25,7 @@ class Routing extends Component {
                     <Route exact path="/my-product" component={MyProduct}></Route>
                     <Route exact path="/inventory" component={Inventory}></Route>
                     <Route exact path="/search" component={ViewProduct}></Route>
+                    <Route exact path="/filter" component={ViewProduct}></Route>
                     <Route exact path="/detail/:items" component={Detail}></Route>
                 </Switch>
             </BrowserRouter>
