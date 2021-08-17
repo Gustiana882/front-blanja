@@ -129,7 +129,7 @@ const ProfileUser = (props) => {
                                         <p className="text-muted"><small>Phone number</small></p>
                                     </label>
                                     <div className="col-sm-7">
-                                        <input type="number" className="form-control" name="phone" onChange={handleChange} value={formProfile.phone} />
+                                        <input type="number" className="form-control" name="phone" onChange={handleChange} value={formProfile.phone || ''} />
                                     </div>
                                 </div>
                                 <div className="d-flex mb-3">
@@ -174,8 +174,8 @@ const ProfileUser = (props) => {
                                         <img src={imageProfile} className="img-fluid rounded-pill" alt="" />
                                     </div>
                                     <div className="d-flex justify-content-center my-3">
-                                        <input id="input-img-profile" type="file" style={{ display: 'none' }} onChange={fileChange} />
-                                        <button class="btn btn-outline-secondary rounded-pill btn-sm px-4" onClick={() => document.getElementById('input-img-profile').click()}>Select image</button>
+                                        <input id="input-img-profile" type="file" style={{ display: 'none' }} onChange={fileChange} value=""/>
+                                        <button className="btn btn-outline-secondary rounded-pill btn-sm px-4" onClick={() => document.getElementById('input-img-profile').click()}>Select image</button>
                                     </div>
                                 </div>
                             </div>

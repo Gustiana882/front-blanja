@@ -10,13 +10,13 @@ const ModalCategory = (props) => {
     const [notif, setNotif] = useState('')
     const [category, setCategory] = useState([])
     const [form, setForm] = useState({ id: null })
-    const [img, setImg] = useState("http://192.168.43.152:9000/public/images/blank.jpg")
+    const [img, setImg] = useState(`${process.env.REACT_APP_DOMAIN}/public/images/blank.jpg`)
 
 
     const getCategory = () => {
         axios({
             method: 'get',
-            url: 'http://192.168.43.152:9000/product/category',
+            url: `${process.env.REACT_APP_DOMAIN}/product/category`,
         }).then((result) => {
             if (!result.data.isError) {
                 return setCategory(result.data.data)
@@ -67,7 +67,7 @@ const ModalCategory = (props) => {
         formData.append("image", form.image)
         axios({
             method: (form.id) ? "put" : "post",
-            url: 'http://192.168.43.152:9000/product/category',
+            url: `${process.env.REACT_APP_DOMAIN}/product/category`,
             headers: {
                 'token': props.user.token,
                 'content-type': 'multipart/form-data',
@@ -90,14 +90,14 @@ const ModalCategory = (props) => {
 
     const editCategory = (id, name, img) => {
         setForm({ id, name })
-        setImg(`http://192.168.43.152:9000/${img}`)
+        setImg(`${process.env.REACT_APP_DOMAIN}/${img}`)
     }
 
 
     const deleteCategory = (id) => {
         axios({
             method: 'delete',
-            url: `http://192.168.43.152:9000/product/category/${id}`,
+            url: `${process.env.REACT_APP_DOMAIN}/product/category/${id}`,
             headers: {
                 'token': props.user.token,
                 'content-type': 'multipart/form-data',
@@ -193,7 +193,7 @@ const ModalCategory = (props) => {
                                                 <tr>
                                                     <td>{value.name}</td>
                                                     <td>
-                                                        <img src={`http://192.168.43.152:9000/${value.image}`} className="img-thumbnail" width={40} alt="..." />
+                                                        <img src={`${process.env.REACT_APP_DOMAIN}/${value.image}`} className="img-thumbnail" width={40} alt="..." />
                                                     </td>
                                                     <td>
                                                         <Link onClick={() => {deleteCategory(value.id)}} className="badge bg-danger nav-link link-light me-2">delete</Link>

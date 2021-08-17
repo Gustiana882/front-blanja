@@ -29,7 +29,7 @@ class Home extends Component {
     }
 
 
-    render() {
+    render = () => {
         const product = this.state.product;
         return (
             <div style={{marginTop:"80px", marginBottom:"80px"}}>
@@ -43,7 +43,7 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className="container">
-                    <div className="">
+                    <div>
                         <h4 className="fw-bold">New</h4>
                         <small className="text-secondary">You’ve never seen it before!</small>
                     </div>

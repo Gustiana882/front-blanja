@@ -22,7 +22,7 @@ class Bag extends Component {
             const token = this.props.user.token
             const response = await axios({ 
                 method: 'get', 
-                url: 'http://192.168.43.152:9000/bag', 
+                url: `${process.env.REACT_APP_DOMAIN}/bag`, 
                 headers: { 'token': token } })
             const { data } = response.data
             this.setState({
@@ -42,7 +42,7 @@ class Bag extends Component {
             const token = this.props.user.token
             axios({
                 method: 'put',
-                url: 'http://192.168.43.152:9000/bag',
+                url: `${process.env.REACT_APP_DOMAIN}/bag`,
                 headers: { 'token': token },
                 data: { 
                     id: id,
@@ -87,7 +87,7 @@ class Bag extends Component {
             for (let i = 0; i < this.state.listDeleteBag.length; i++) {
                 const list = this.state.listDeleteBag[i]
                 const token = this.props.user.token
-                await axios({ method: 'delete', url: `http://192.168.43.152:9000/bag/${list}`, headers: { 'token': token } })
+                await axios({ method: 'delete', url: `${process.env.REACT_APP_DOMAIN}/bag/${list}`, headers: { 'token': token } })
                 // const { data } = response.data
                 this.getBag()
             }
@@ -98,7 +98,6 @@ class Bag extends Component {
 
     render(props) {
         let sum = 0;
-        console.log(this.props.user.token)
         return (
             <div>
                 <Header propsHistory={this.props.history} />
@@ -139,7 +138,7 @@ class Bag extends Component {
                                                 <Checkbox checked={(!checked) ? "" : "checked"} id={value.id} callback={this.selectCardBag} />
 
                                             </div>
-                                            <img src={`http://192.168.43.152:9000/${value.product.image}`} alt="..." width={55} height={55} />
+                                            <img src={`${process.env.REACT_APP_DOMAIN}/${value.product.image}`} alt="..." width={55} height={55} />
                                             <div className="mx-2 bag-title">
                                                 <h6 className="text-medium m-0">{value.product.name}</h6>
                                                 <small className="brand text-secondary">{value.product.brand}</small>

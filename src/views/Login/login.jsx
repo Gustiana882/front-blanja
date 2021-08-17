@@ -70,7 +70,7 @@ class Login extends Component {
         })
     }
 
-    render() {
+    render = () => {
         return (
             <div className="mt-4">
                 <Alert />

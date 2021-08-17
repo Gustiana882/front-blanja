@@ -10,12 +10,12 @@ const ModalProduct = (props) => {
 
     const [category, setCategory] = useState([])
     const [form, setForm] = useState({})
-    const [img, setImg] = useState("http://192.168.43.152:9000/public/images/blank.jpg")
+    const [img, setImg] = useState(`${process.env.REACT_APP_DOMAIN}/public/images/blank.jpg`)
 
     const getCategory = () => {
         axios({
             method: 'get',
-            url: 'http://192.168.43.152:9000/product/category',
+            url: `${process.env.REACT_APP_DOMAIN}/product/category`,
         }).then((result) => {
             if (!result.data.isError) {
                 return setCategory(result.data.data)
@@ -77,7 +77,7 @@ const ModalProduct = (props) => {
 
         axios({
             method: "put",
-            url: 'http://192.168.43.152:9000/product',
+            url: `${process.env.REACT_APP_DOMAIN}/product`,
             headers: {
                 'token': props.user.token,
                 'content-type': 'multipart/form-data',
@@ -150,7 +150,7 @@ const ModalProduct = (props) => {
                                     <label htmlFor="exampleFormControlInput1" className="form-label">
                                         Category
                                     </label>
-                                    <select className="form-select" name="category" onChange={handleInput}>
+                                    <select className="form-select" name="category" onChange={handleInput} defaultValue=''>
                                         <option value={-1}>category</option>
                                         {category.map((val) =>
 

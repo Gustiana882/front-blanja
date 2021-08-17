@@ -1,5 +1,5 @@
 import Alert from '../../component/alert/alert'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import logo from '../../asset/logo.png'
 import { useState } from 'react'
 import withAuth from '../../utils/WithAuth'
@@ -8,7 +8,7 @@ import Axios from 'axios'
 import { toast } from 'react-toastify'
 
 const Signup = () => {
-
+    const history = useHistory()
     const [formSignUp, setFormSignUp] = useState({
         name: '',
         email: '',
@@ -77,7 +77,10 @@ const Signup = () => {
                 'content-type': 'application/json',
             },
             data: formData(),
-        }).then(res => toast.success(res.data.message))
+        }).then(res => {
+            toast.success(res.data.message)
+            history.push('/login')
+        })
             .catch(error => toast.error(error.message))
 
     }
@@ -114,7 +117,7 @@ const Signup = () => {
                             Please login with your account
                         </h6>
                     </div>
-                    <form onSubmit={handleSubmit} className={`needs-validation ${error}`} novalidate>
+                    <form onSubmit={handleSubmit} className={`needs-validation ${error}`} noValidate >
                         <div className="col-12 d-flex justify-content-center">
                             <div
                                 className="btn-group col-8 mx-auto mt-3 mb-5"

@@ -57,7 +57,7 @@ const Calendar = (props) => {
     return (
         <div className="mb-3 row">
             <label htmlFor="phone-number" className="col-sm-4 col-form-label" >
-                <p className="text-muted"><small>Phone number</small></p>
+                <p className="text-muted"><small>Date of birth</small></p>
             </label>
             <div className="col">
                 <Select

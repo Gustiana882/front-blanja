@@ -20,7 +20,7 @@ const ModalFilter = (props) => {
     const getCategory = () => {
         axios({
             method: 'get',
-            url: 'http://192.168.43.152:9000/product/category',
+            url: `${process.env.REACT_APP_DOMAIN}/product/category`,
         }).then((result) => setCategory(result.data.data))
           .catch((error) => console.log(error))
     }
@@ -28,7 +28,6 @@ const ModalFilter = (props) => {
 
     useEffect(() => {
         getCategory()
-        console.log('useEffect')
     }, [])
 
 
@@ -88,7 +87,6 @@ const ModalFilter = (props) => {
                                 <div className="d-flex">
                                     <div className="form-check p-0 m-0">
                                         <input
-                                            className
                                             type="checkbox"
                                             name="name"
                                             id="exampleRadios1"
@@ -100,7 +98,6 @@ const ModalFilter = (props) => {
                                     </div>
                                     <div className="form-check p-0 m-0">
                                         <input
-                                            className
                                             type="checkbox"
                                             name="name"
                                             id="exampleRadios2"
@@ -109,17 +106,17 @@ const ModalFilter = (props) => {
                                         />
                                         <span>Z-A</span>
                                     </div>
-                                    <div className="form-check p-0 m-0">
+                                    {/* <div className="form-check p-0 m-0">
                                         <input
                                             className
                                             type="checkbox"
                                             name="price"
                                             id="exampleRadios2"
-                                            value="DESC"
+                                            value="ASC"
                                             onChange={handleChange}
                                         />
                                         <span>0 - 1.000.000</span>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <hr />
@@ -137,8 +134,8 @@ const ModalFilter = (props) => {
                                         />
                                         <span>All</span>
                                     </div>
-                                    {category.map((value) => 
-                                        <div className="form-check p-0 m-0">
+                                    {category.map((value, i) => 
+                                        <div className="form-check p-0 m-0" key={i}>
                                             <input
                                                 type="checkbox"
                                                 name="category"

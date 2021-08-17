@@ -24,7 +24,7 @@ class Detail extends Component {
     getDataProductById = async () => {
         const { params } = this.props.match
         try {
-            const res = await axios({ method: 'get', url: `http://192.168.43.152:9000/product/${params.items.split('-').pop()}` })
+            const res = await axios({ method: 'get', url: `${process.env.REACT_APP_DOMAIN}/product/${params.items.split('-').pop()}` })
             this.setState({ product: res.data.data[0] })
         } catch (error) {
             toast.error(error.message)
@@ -86,7 +86,7 @@ class Detail extends Component {
                     <section className="row justify-content-md-center">
                         <div className="col-12 col-md-6 col-lg-4 px-4">
                             <div className="card card-detail">
-                                <img src={`http://192.168.43.152:9000/${this.state.product.image}`} className="card-img-top" alt="..." />
+                                <img src={`${process.env.REACT_APP_DOMAIN}/${this.state.product.image}`} className="card-img-top" alt="..." />
                             </div>
 
                         </div>
@@ -113,12 +113,14 @@ class Detail extends Component {
                                             <small className="fw-bolder">Chat</small>
                                         </p>
                                     </button>
-                                    <button type="button" className="btn btn-sm rounded-pill px-4 mt-3 btn-outline-secondary" onClick={() => this.addBag(this.state.product.id)}>
-                                        <p className="m-0">
-                                            <small className="fw-bolder">Add Bag</small>
-                                        </p>
-                                    </button>
-                                    <button type="button" className="btn btn-sm rounded-pill px-4 mt-3 btn-danger">
+                                    {(this.props.user.data.roles === 'seller') ? '' :
+                                        <button type="button" className="btn btn-sm rounded-pill px-4 mt-3 btn-outline-secondary" onClick={() => this.addBag(this.state.product.id)}>
+                                            <p className="m-0">
+                                                <small className="fw-bolder">Add Bag</small>
+                                            </p>
+                                        </button>
+                                    }
+                                    <button type="button" className="btn btn-sm rounded-pill px-5 mt-3 btn-danger">
                                         <p className="m-0">
                                             <small className="fw-bolder">Buy Now</small>
                                         </p>

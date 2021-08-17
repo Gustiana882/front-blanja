@@ -7,7 +7,9 @@ import { toast } from 'react-toastify'
 import { connect } from 'react-redux'
 import './profile.css'
 import FormData from 'form-data'
-// import Calendar from '../../../component/calendar/calendar';
+import { bindActionCreators } from 'redux'
+import ActionsUser from '../../../stores/action/userAction'
+
 
 const ProfileStore = (props) => {
 
@@ -29,6 +31,14 @@ const ProfileStore = (props) => {
         }).then((result) => {
             if (!result.data.isError) {
                 setimageProfile(`${process.env.REACT_APP_DOMAIN}/${result.data.data[0].image}`)
+                props.UserSet({
+                    address : result.data.data[0].address,
+                    email   : result.data.data[0].email,
+                    image   : result.data.data[0].image,
+                    name    : result.data.data[0].name,
+                    phone   : result.data.data[0].phone,
+                    roles   : result.data.data[0].roles,
+                })
                 return setformProfile(result.data.data[0])
             } else {
                 return toast.error(result.data.message)
@@ -72,19 +82,21 @@ const ProfileStore = (props) => {
         formData.append('name', formProfile.name)
         formData.append('email', formProfile.email)
         formData.append('phone', formProfile.phone)
-        formData.append('gender', formProfile.gender)
+        formData.append('store', formProfile.store)
         formData.append('address', formProfile.address)
         formData.append('image', formProfile.image)
         axios({
             method: "put",
-            url: `${process.env.REACT_APP_DOMAIN}/profile/edit-profile`,
+            url: `${process.env.REACT_APP_DOMAIN}/profile/${props.user.data.roles}/edit-profile`,
             data: formData,
             headers: {
                 'token': props.user.token,
                 'content-type': 'multipart/form-data',
             }
-        }).then(res => toast.success(res.data.message))
-            .catch(error => toast.error(error.message))
+        }).then(res => {
+            toast.success(res.data.message)
+            getProfile()
+        }).catch(error => toast.error(error.message))
     }
 
 
@@ -107,7 +119,7 @@ const ProfileStore = (props) => {
                                         <p className="text-muted"><small>Store Name</small></p>
                                     </label>
                                     <div className="col-sm-7">
-                                        <input type="text" className="form-control" name="name" onChange={handleChange} value={formProfile.store} />
+                                        <input type="text" className="form-control" name="store" onChange={handleChange} value={formProfile.store} />
                                     </div>
                                 </div>
                                 <div className="mb-3 row">
@@ -132,7 +144,7 @@ const ProfileStore = (props) => {
                                         <p className="text-muted"><small>Description</small></p>
                                     </label>
                                     <div className="col-sm-7">
-                                        <input type="text" className="form-control" name="phone" onChange={handleChange} value={formProfile.description} />
+                                        <input type="text" className="form-control" name="description" onChange={handleChange} value={formProfile.description} />
                                     </div>
                                 </div>
                             </div>
@@ -166,4 +178,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(ProfileStore);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        UserSet: bindActionCreators(ActionsUser.UserSet, dispatch),
+    }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileStore);

@@ -17,7 +17,7 @@ const MyProduct = (props) => {
     const getProduct = () => {
         axios({
             method: 'get',
-            url: 'http://192.168.43.152:9000/product/my-product',
+            url: `${process.env.REACT_APP_DOMAIN}/product/my-product`,
             headers: {
                 'token': props.user.token,
                 'content-type': 'multipart/form-data',
@@ -36,7 +36,7 @@ const MyProduct = (props) => {
     const deleteProduct = (id) => {
         axios({
             method: 'delete',
-            url: `http://192.168.43.152:9000/product/${id}`,
+            url: `${process.env.REACT_APP_DOMAIN}/product/${id}`,
             headers: {
                 'token': props.user.token,
                 'content-type': 'multipart/form-data',
@@ -130,6 +130,8 @@ const MyProduct = (props) => {
                                                 </div>
                                                 <div className="col">
                                                     <Link onClick={() => deleteProduct(product.id)} className="badge bg-danger nav-link link-light me-2">delete</Link>
+
+                                                    <Link to={`detail/${product.name.replace(/ /, '-')}-${product.id}`} className="badge bg-primary nav-link link-light me-2">edit</Link>
                                                     {/* <ModalProduct productData={product} /> */}
                                                 </div>
                                             </div>
