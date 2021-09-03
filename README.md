@@ -1,5 +1,5 @@
 <h1 align="center">
-  Backend Ticketing
+  Blanja App
 </h1>
 
 <p align="center"><img src="https://www.arkademy.com/img/logo%20arkademy.1c82cf5c.svg" width="500px" alt="Arkademylogo.svg" /></p>
@@ -15,7 +15,7 @@
 
 ```bash
 
-  git clone https://github.com/Gustiana882/back-ticketing.git
+  git clone https://github.com/Gustiana882/reactjs-intro.git
   
 ```
 
@@ -29,7 +29,7 @@
 ### run app
 ```bash
 
-  cd back-ticketing
+  cd reactjs-intro
 
   yarn start
   
