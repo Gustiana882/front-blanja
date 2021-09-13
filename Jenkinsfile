@@ -7,28 +7,28 @@ pipeline {
         stage('Instaling') {
             steps {
                 nodejs("nodejs") {
-                    sh 'npm install'
+                    sh 'ls'
                 }
             }
         }
-        stage("Build image") {
-            steps {
-                script {
-                    builderImage = docker.build("${imagename}")
-                }
-            }
-        }
-        stage("Push Image") {
-            steps {
-                script {
-                    builderImage.push()
-                }
-            }
-        }
-        stage("test") {
-            steps {
-                sh "echo 'success runing'"
-            }
-        }
+        // stage("Build image") {
+        //     steps {
+        //         script {
+        //             builderImage = docker.build("${imagename}")
+        //         }
+        //     }
+        // }
+        // stage("Push Image") {
+        //     steps {
+        //         script {
+        //             builderImage.push()
+        //         }
+        //     }
+        // }
+        // stage("test") {
+        //     steps {
+        //         sh "echo 'success runing'"
+        //     }
+        // }
     }
 }
