@@ -7,7 +7,7 @@ pipeline {
         stage('Instaling') {
             steps {
                 nodejs("yarn") {
-                    sh 'ls'
+                    sh 'yarn install'
                 }
             }
         }
