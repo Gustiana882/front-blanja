@@ -4,13 +4,13 @@ pipeline {
     agent any
 
     stages {
-        stage('Instaling') {
-            steps {
-                nodejs("nodejs") {
-                    sh 'ls'
-                }
-            }
-        }
+        // stage('Instaling') {
+        //     steps {
+        //         nodejs("nodejs") {
+        //             sh 'ls'
+        //         }
+        //     }
+        // }
         stage("Build image") {
             steps {
                 script {
@@ -18,17 +18,18 @@ pipeline {
                 }
             }
         }
-        // stage("Push Image") {
-        //     steps {
-        //         script {
-        //             builderImage.push()
-        //         }
-        //     }
-        // }
-        // stage("test") {
-        //     steps {
-        //         sh "echo 'success runing'"
-        //     }
-        // }
+        stage("Push Image") {
+            steps {
+                script {
+                    builderImage.push()
+                }
+            }
+        }
+        stage("test") {
+            steps {
+                sh "docker image prune -f"
+                sh "echo 'success runing'"
+            }
+        }
     }
 }
