@@ -25,7 +25,7 @@ pipeline {
                 }
             }
         }
-        stage("test") {
+        stage("finish") {
             steps {
                 sh "docker image prune -f"
                 sh "echo 'success runing'"
