@@ -4,13 +4,13 @@ pipeline {
     agent any
 
     stages {
-        stage('Instaling') {
-            steps {
-                nodejs("yarn") {
-                    sh 'yarn install'
-                }
-            }
-        }
+        // stage('Instaling') {
+        //     steps {
+        //         nodejs("yarn") {
+        //             sh 'yarn install'
+        //         }
+        //     }
+        // }
         stage("Build image") {
             steps {
                 script {
