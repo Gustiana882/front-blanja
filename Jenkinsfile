@@ -11,13 +11,13 @@ pipeline {
                 }
             }
         }
-        // stage("Build image") {
-        //     steps {
-        //         script {
-        //             builderImage = docker.build("${imagename}")
-        //         }
-        //     }
-        // }
+        stage("Build image") {
+            steps {
+                script {
+                    builderImage = docker.build("${imagename}")
+                }
+            }
+        }
         // stage("Push Image") {
         //     steps {
         //         script {
