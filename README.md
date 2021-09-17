@@ -2,7 +2,8 @@
   Blanja App
 </h1>
 
-<p align="center"><img src="https://www.arkademy.com/img/logo%20arkademy.1c82cf5c.svg" width="500px" alt="Arkademylogo.svg" /></p>
+<p align="center"><img src="https://www.arkademy.com/img/logo%20arkademy.1c82cf5c.svg" width="200px" alt="Arkademylogo.svg" />
+  <img src="https://user-images.githubusercontent.com/55304067/133711515-d3fa47a3-fb29-4db6-bb45-01a62b428bd4.png" width="200px" alt="Arkademylogo.svg" /></p>
 
 <p align="center">
     <a href="https://www.arkademy.com/" target="blank">Our Website</a>
@@ -39,51 +40,78 @@ Bags
   <img src="https://user-images.githubusercontent.com/55304067/132006864-54232c9c-3cfa-4b3e-acdd-de4e44b7eaf2.png" width="600px" />
 </p>
 
+<h4 align="center">
+Profile
+</h4>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/55304067/133736923-c037f06d-c9db-497c-894f-cb92fbd52b01.png" width="600px" />
+</p>
 
-## Clone the repository
+<h4 align="center">
+Edit & Delete Product
+</h4>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/55304067/133737032-810f7c79-5ea0-4619-8084-447b216710a4.png" width="600px" />
+</p>
+
+<h4 align="center">
+Add New Product
+</h4>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/55304067/133737160-aa68cb8e-31be-413f-9786-f243dc4d4ad2.png" width="600px" />
+</p>
+
+<p align="center">
+    <a href="https://frontend-blanja.netlify.app/" target="blank">View Demo</a>
+  · <a href="https://github.com/Gustiana882/front-blanja/issues">Report Bug</a>
+  · <a href="https://github.com/Gustiana882/front-blanja/pulls">Request Feature</a>
+</p>
+
+
+## 💻 Built with
+
+[![Node.js](https://img.shields.io/badge/Node.js-v.12.13-green.svg?style=rounded-square)](https://nodejs.org/)
+
+## Fiture
+
+### 🌟 Customer
+  - Login
+  - Register
+  - Search Product
+  - Bag
+  - Profile
+### 🌟 Seller
+  - Login Seller
+  - Register Seller
+  - CRUD Product
+  - Profile Store
+
+
+## 🛠️ Installation Steps
+
+1. Clone the repository
 
 ```bash
-
-  git clone https://github.com/Gustiana882/reactjs-intro.git
-  
+git clone https://github.com/Gustiana882/front-blanja.git
 ```
 
-### Install dependencies
-```bash
-
-  yarn install
-  
-```
-
-### run app
-```bash
-
-  cd reactjs-intro
-
-  yarn start
-  
-```
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn build`
+2. Install dependencies
 
 ```bash
-
-  yarn run build
-  
+npm install
 ```
 
-### Backend Blanja
-<a href="https://github.com/Gustiana882/rest-api-expressjs" target="blank">https://github.com/Gustiana882/rest-api-expressjs</a>
+3. Run the app
+
 ```bash
-
-  git clone https://github.com/Gustiana882/rest-api-expressjs.git
-
-  yarn start
-  
+npm start
 ```
+
+
+### `Backend Ticketing Repository`
+ <a href="https://github.com/Gustiana882/back-blanja" target="blank">https://github.com/Gustiana882/back-blanja</a>
+
+<hr>
+<p align="center">
+Developed with ❤️ in Indonesia 	🇮🇩
+</p>
