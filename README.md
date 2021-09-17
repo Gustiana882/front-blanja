@@ -109,7 +109,7 @@ npm start
 
 
 ### `Backend Ticketing Repository`
- <a href="https://github.com/Gustiana882/backend-blanja" target="blank">https://github.com/Gustiana882/back-blanja</a>
+ <a href="https://github.com/Gustiana882/backend-blanja" target="blank">https://github.com/Gustiana882/backend-blanja</a>
 
 <hr>
 <p align="center">
