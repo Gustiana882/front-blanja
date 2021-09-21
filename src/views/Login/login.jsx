@@ -9,6 +9,8 @@ import { bindActionCreators } from 'redux'
 import ActionsUser from '../../stores/action/userAction'
 import WithAuth from '../../utils/WithAuth';
 
+import _user_ from '../../_moch_/user.json'
+
 class Login extends Component {
     constructor(props) {
         super(props)
@@ -38,28 +40,42 @@ class Login extends Component {
         }).catch(error => toast.error(error.message))
     }
 
+    getUserMoc = () => {
+        this.props.UserSet({
+            address: _user_[0].address,
+            email: _user_[0].email,
+            image: _user_[0].image,
+            name: _user_[0].name,
+            phone: _user_[0].phone,
+            roles: _user_[0].roles,
+        })
+        this.props.AuthSet("token1234")
+    }
+
 
     handleSubmit = (e) => {
         e.preventDefault()
         console.log('ok')
-        axios({
-            method: 'post',
-            url: `${process.env.REACT_APP_DOMAIN}/login/${this.state.loginForm.btnradio}`,
-            data: {
-                email: this.state.loginForm.email,
-                password: this.state.loginForm.password,
-            }
-        }).then((response) => {
-            const res = response.data;
-            if (res.message === 'login berhasil!') {
-                const token = res.data[0].token_key;
-                this.getUser(token)
-                this.props.AuthSet(token)
-                return this.props.history.goBack('/')
-            } else {
-                return toast.error(res.message)
-            }
-        }).catch(error => toast.error(error.message))
+        this.props.history.goBack('/')
+        this.getUserMoc()
+        // axios({
+        //     method: 'post',
+        //     url: `${process.env.REACT_APP_DOMAIN}/login/${this.state.loginForm.btnradio}`,
+        //     data: {
+        //         email: this.state.loginForm.email,
+        //         password: this.state.loginForm.password,
+        //     }
+        // }).then((response) => {
+        //     const res = response.data;
+        //     if (res.message === 'login berhasil!') {
+        //         const token = res.data[0].token_key;
+        //         this.getUser(token)
+        //         this.props.AuthSet(token)
+        //         return this.props.history.goBack('/')
+        //     } else {
+        //         return toast.error(res.message)
+        //     }
+        // }).catch(error => toast.error(error.message))
     }
 
     handleChange = (element) => {

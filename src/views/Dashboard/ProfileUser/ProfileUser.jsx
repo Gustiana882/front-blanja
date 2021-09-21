@@ -9,6 +9,8 @@ import './profile.css'
 import FormData from 'form-data'
 import Calendar from '../../../component/calendar/calendar';
 
+import _user_ from '../../../_moch_/user.json'
+
 const ProfileUser = (props) => {
 
     const [imageProfile, setimageProfile] = useState('')
@@ -19,23 +21,24 @@ const ProfileUser = (props) => {
     })
 
     const getProfile = () => {
-        axios({
-            method: 'get',
-            url: `${process.env.REACT_APP_DOMAIN}/profile/${props.user.data.roles}`,
-            headers: {
-                'token': props.user.token,
-                'content-type': 'multipart/form-data',
-            },
-        }).then((result) => {
-            if (!result.data.isError) {
-                setimageProfile(`${process.env.REACT_APP_DOMAIN}/${result.data.data[0].image}`)
-                return setformProfile(result.data.data[0])
-            } else {
-                return toast.error(result.data.message)
-            }
-        }).catch((error) => {
-            console.log(error)
-        })
+        // axios({
+        //     method: 'get',
+        //     url: `${process.env.REACT_APP_DOMAIN}/profile/${props.user.data.roles}`,
+        //     headers: {
+        //         'token': props.user.token,
+        //         'content-type': 'multipart/form-data',
+        //     },
+        // }).then((result) => {
+        //     if (!result.data.isError) {
+        //         setimageProfile(`${process.env.REACT_APP_DOMAIN}/${result.data.data[0].image}`)
+        //         return setformProfile(result.data.data[0])
+        //     } else {
+        //         return toast.error(result.data.message)
+        //     }
+        // }).catch((error) => {
+        //     console.log(error)
+        // })
+        setformProfile(_user_[0])
     }
 
 
@@ -66,10 +69,10 @@ const ProfileUser = (props) => {
     }
 
 
-    useEffect(() => {
-        getProfile()
+    // useEffect(() => {
+    //     getProfile()
 
-    }, [props])
+    // }, [props])
 
 
     const handleSave = () => {

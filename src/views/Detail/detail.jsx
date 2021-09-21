@@ -8,8 +8,10 @@ import ProgressBar from "../../component/progres-bar/progres-bar";
 import axios from "axios";
 import { toast } from 'react-toastify'
 import Rupiah from '../../helper/rupiah'
-import ModalProduct from "./ModalProduct";
+// import ModalProduct from "./ModalProduct";
 import { connect } from 'react-redux'
+
+import _product_ from '../../_moch_/product.json'
 
 
 class Detail extends Component {
@@ -23,12 +25,15 @@ class Detail extends Component {
 
     getDataProductById = async () => {
         const { params } = this.props.match
-        try {
-            const res = await axios({ method: 'get', url: `${process.env.REACT_APP_DOMAIN}/product/${params.items.split('-').pop()}` })
-            this.setState({ product: res.data.data[0] })
-        } catch (error) {
-            toast.error(error.message)
-        }
+        // try {
+        //     const res = await axios({ method: 'get', url: `${process.env.REACT_APP_DOMAIN}/product/${params.items.split('-').pop()}` })
+        //     this.setState({ product: res.data.data[0] })
+        // } catch (error) {
+        //     toast.error(error.message)
+        // }
+        const id = params.items.split('-').pop()
+        this.setState({ product: _product_.filter((v) => (v.id === Number(id)))[0] })
+
     }
 
     componentDidMount() {
@@ -86,7 +91,7 @@ class Detail extends Component {
                     <section className="row justify-content-md-center">
                         <div className="col-12 col-md-6 col-lg-4 px-4">
                             <div className="card card-detail">
-                                <img src={`${process.env.REACT_APP_DOMAIN}/${this.state.product.image}`} className="card-img-top" alt="..." />
+                                <img src={this.state.product.image} className="card-img-top" alt="..." />
                             </div>
 
                         </div>
@@ -97,7 +102,7 @@ class Detail extends Component {
                                     <small className="fw-bolder text-secodary">{this.state.product.brand}</small>
                                 </p>
 
-                                <Star review={this.state.product.review} star={this.state.product.star} />
+                                <Star review={this.state.product.rate} star={this.state.product.rate} />
 
                                 <div className="my-3">
                                     <p className="text-muted mb-0"><small className="fw-lighte">Price</small></p>
@@ -126,7 +131,7 @@ class Detail extends Component {
                                         </p>
                                     </button>
                                     <div className="mt-3">
-                                        <ModalProduct productData={this.state.product}></ModalProduct>
+                                        {/* <ModalProduct productData={this.state.product}></ModalProduct> */}
                                     </div>
                                 </div>
                             </div>

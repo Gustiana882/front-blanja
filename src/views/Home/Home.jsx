@@ -2,9 +2,12 @@ import { Component } from "react";
 import Header from '../../component/header/header';
 import Carousel from '../../component/carousel/carousel';
 import Card from '../../component/card/card';
-import axios from "axios";
+// import axios from "axios";
 import { toast } from 'react-toastify'
 import { connect } from 'react-redux'
+import _banner_ from '../../_moch_/banner.json'
+import _category_ from '../../_moch_/category.json'
+import _product_ from '../../_moch_/product.json'
 
 
 class Home extends Component {
@@ -12,20 +15,33 @@ class Home extends Component {
         super(props)
         this.state = {
             product: [],
+            category: [],
+            banner: [],
         }
     }
 
     getDataProduct = async () => {
         try {
-            const res = await axios({ method: 'get', url: `${process.env.REACT_APP_DOMAIN}/product` })
-            this.setState({ product: res.data.data })
+            this.setState({ product: _product_ })
+            // const res = await axios({ method: 'get', url: `${process.env.REACT_APP_DOMAIN}/product` })
+            // this.setState({ product: res.data.data })
         } catch (error) {
             toast.error('Maaf API Offline')
         }
     }
 
+    getCategory = () => {
+        this.setState({ category: _category_ })
+    }
+
+    getBanner = () => {
+        this.setState({ banner: _banner_ })
+    }
+
     componentDidMount = () => {
         this.getDataProduct()
+        this.getBanner()
+        this.getCategory()
     }
 
 
@@ -36,10 +52,10 @@ class Home extends Component {
                 <Header propsHistory={this.props.history} />
                 <div className="container carousel">
                     <div className="my-5">
-                        <Carousel width={370} height={110} carouselName="" play={true} />
+                        <Carousel width={370} height={110} carouselName="" play={true} data={this.state.banner} />
                     </div>
                     <div className="my-5">
-                        <Carousel width={120} height={110} carouselName="Categori" />
+                        <Carousel width={120} height={110} carouselName="Categori" data={this.state.category} />
                     </div>
                 </div>
                 <div className="container">
@@ -56,7 +72,7 @@ class Home extends Component {
                                     brand={val.brand}
                                     review={val.review}
                                     image={val.image}
-                                    slug={`${val.name.replace(/ /, '-')}-${val.id}`} />
+                                    slug={`${val.name.replace(/\s/g, '-')}-${val.id}`} />
                             </div>
                         )}
                     </div>
