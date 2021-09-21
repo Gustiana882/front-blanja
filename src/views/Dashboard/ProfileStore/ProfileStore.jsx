@@ -10,6 +10,8 @@ import FormData from 'form-data'
 import { bindActionCreators } from 'redux'
 import ActionsUser from '../../../stores/action/userAction'
 
+import _user_ from '../../../_moch_/user.json'
+
 
 const ProfileStore = (props) => {
 
@@ -21,31 +23,33 @@ const ProfileStore = (props) => {
     })
 
     const getProfile = () => {
-        axios({
-            method: 'get',
-            url: `${process.env.REACT_APP_DOMAIN}/profile/${props.user.data.roles}`,
-            headers: {
-                'token': props.user.token,
-                'content-type': 'multipart/form-data',
-            },
-        }).then((result) => {
-            if (!result.data.isError) {
-                setimageProfile(`${process.env.REACT_APP_DOMAIN}/${result.data.data[0].image}`)
-                props.UserSet({
-                    address : result.data.data[0].address,
-                    email   : result.data.data[0].email,
-                    image   : result.data.data[0].image,
-                    name    : result.data.data[0].name,
-                    phone   : result.data.data[0].phone,
-                    roles   : result.data.data[0].roles,
-                })
-                return setformProfile(result.data.data[0])
-            } else {
-                return toast.error(result.data.message)
-            }
-        }).catch((error) => {
-            console.log(error)
-        })
+        // axios({
+        //     method: 'get',
+        //     url: `${process.env.REACT_APP_DOMAIN}/profile/${props.user.data.roles}`,
+        //     headers: {
+        //         'token': props.user.token,
+        //         'content-type': 'multipart/form-data',
+        //     },
+        // }).then((result) => {
+        //     if (!result.data.isError) {
+        //         setimageProfile(`${process.env.REACT_APP_DOMAIN}/${result.data.data[0].image}`)
+        //         props.UserSet({
+        //             address : result.data.data[0].address,
+        //             email   : result.data.data[0].email,
+        //             image   : result.data.data[0].image,
+        //             name    : result.data.data[0].name,
+        //             phone   : result.data.data[0].phone,
+        //             roles   : result.data.data[0].roles,
+        //         })
+        //         return setformProfile(result.data.data[0])
+        //     } else {
+        //         return toast.error(result.data.message)
+        //     }
+        // }).catch((error) => {
+        //     console.log(error)
+        // })
+
+        setformProfile(_user_[0])
     }
 
 

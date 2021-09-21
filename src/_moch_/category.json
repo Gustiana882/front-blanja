@@ -1,0 +1,58 @@
+[
+    {
+        "name": "T-shirt",
+        "image": "/assets/img/category/tshirt.png"
+    },
+    {
+        "name": "Jacket",
+        "image": "/assets/img/category/jacket.png"
+    },
+    {
+        "name": "Shoes",
+        "image": "/assets/img/category/shoes.png"
+    },
+    {
+        "name": "Pants",
+        "image": "/assets/img/category/pants.png"
+    },
+    {
+        "name": "Assesories",
+        "image": "/assets/img/category/accessories.png"
+    },
+    {
+        "name": "Watch",
+        "image": "/assets/img/category/watch.png"
+    },
+    {
+        "name": "Bag",
+        "image": "/assets/img/category/bag.png"
+    },
+    {
+        "name": "Cap",
+        "image": "/assets/img/category/cap.png"
+    },
+    {
+        "name": "Dress",
+        "image": "/assets/img/category/dress.png"
+    },
+    {
+        "name": "Glasses",
+        "image": "/assets/img/category/glasses.png"
+    },
+    {
+        "name": "Handbag",
+        "image": "/assets/img/category/handbag.png"
+    },
+    {
+        "name": "Shorts",
+        "image": "/assets/img/category/shorts.png"
+    },
+    {
+        "name": "Socks",
+        "image": "/assets/img/category/socks.png"
+    },
+    {
+        "name": "Tie",
+        "image": "/assets/img/category/tie.png"
+    }
+]

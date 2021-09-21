@@ -8,6 +8,8 @@ import Rupiah from '../../../helper/rupiah'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
 
+import _product_ from '../.././../_moch_/product.json'
+
 const MyProduct = (props) => {
  
     const [load, setLoad] = useState(false)
@@ -15,22 +17,23 @@ const MyProduct = (props) => {
 
 
     const getProduct = () => {
-        axios({
-            method: 'get',
-            url: `${process.env.REACT_APP_DOMAIN}/product/my-product`,
-            headers: {
-                'token': props.user.token,
-                'content-type': 'multipart/form-data',
-            },
-        }).then((result) => {
-            if (!result.data.isError) {
-                return setProduct(result.data.data)
-            } else {
-                return toast.error(result.data.message)
-            }
-        }).catch((error) => {
-            console.log(error)
-        })
+        // axios({
+        //     method: 'get',
+        //     url: `${process.env.REACT_APP_DOMAIN}/product/my-product`,
+        //     headers: {
+        //         'token': props.user.token,
+        //         'content-type': 'multipart/form-data',
+        //     },
+        // }).then((result) => {
+        //     if (!result.data.isError) {
+        //         return setProduct(result.data.data)
+        //     } else {
+        //         return toast.error(result.data.message)
+        //     }
+        // }).catch((error) => {
+        //     console.log(error)
+        // })
+        setProduct(_product_)
     }
  
     const deleteProduct = (id) => {
@@ -116,7 +119,7 @@ const MyProduct = (props) => {
                                         return (
                                             <div className="row align-items-center justify-content-between my-3 border p-1" key={i} >
                                                 <div className="col">
-                                                    <img src={`http://localhost:9000/${product.image}`} alt="..." width={55} height={55} />
+                                                    <img src={product.image} alt="..." width={55} height={55} />
                                                 </div>
                                                 <div className="col mx-2 bag-title">
                                                     <h6 className="text-medium m-0">{product.name}</h6>
