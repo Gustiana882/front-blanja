@@ -47,7 +47,7 @@
 </table>
 
 <p align="center">
-    <a href="https://frontend-blanja.netlify.app/" target="blank">View Demo</a>
+    <a href="http://blanjanow.online/" target="blank">View Demo</a>
   · <a href="https://github.com/Gustiana882/front-blanja/issues">Report Bug</a>
   · <a href="https://github.com/Gustiana882/front-blanja/pulls">Request Feature</a>
 </p>
