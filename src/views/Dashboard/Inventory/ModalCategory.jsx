@@ -189,15 +189,15 @@ const ModalCategory = (props) => {
                                     </thead>
                                     <tbody>
                                         {
-                                            category.map((value) => (
-                                                <tr>
+                                            category.map((value, i) => (
+                                                <tr key={i}>
                                                     <td>{value.name}</td>
                                                     <td>
                                                         <img src={`${process.env.REACT_APP_DOMAIN}/${value.image}`} className="img-thumbnail" width={40} alt="..." />
                                                     </td>
                                                     <td>
-                                                        <Link onClick={() => {deleteCategory(value.id)}} className="badge bg-danger nav-link link-light me-2">delete</Link>
-                                                        <Link onClick={() => {editCategory(value.id, value.name, value.image)}} className="badge bg-primary px-3 nav-link link-light">edit</Link>
+                                                        <Link to='#' onClick={() => {deleteCategory(value.id)}} className="badge bg-danger nav-link link-light me-2">delete</Link>
+                                                        <Link to='#' onClick={() => {editCategory(value.id, value.name, value.image)}} className="badge bg-primary px-3 nav-link link-light">edit</Link>
                                                     </td>
                                                 </tr>
                                             ))

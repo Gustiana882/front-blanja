@@ -116,7 +116,7 @@ const MyProduct = (props) => {
                                         return (
                                             <div className="row align-items-center justify-content-between my-3 border p-1" key={i} >
                                                 <div className="col">
-                                                    <img src={`http://localhost:9000/${product.image}`} alt="..." width={55} height={55} />
+                                                    <img src={`${process.env.REACT_APP_DOMAIN}/${product.image}`} alt="..." width={55} height={55} />
                                                 </div>
                                                 <div className="col mx-2 bag-title">
                                                     <h6 className="text-medium m-0">{product.name}</h6>
@@ -129,7 +129,7 @@ const MyProduct = (props) => {
                                                     <h6 className="text-bold mb-0 fw-bolder">{Rupiah(product.price)}</h6>
                                                 </div>
                                                 <div className="col">
-                                                    <Link onClick={() => deleteProduct(product.id)} className="badge bg-danger nav-link link-light me-2">delete</Link>
+                                                    <Link to="#" onClick={() => deleteProduct(product.id)} className="badge bg-danger nav-link link-light me-2">delete</Link>
 
                                                     <Link to={`detail/${product.name.replace(/ /, '-')}-${product.id}`} className="badge bg-primary nav-link link-light me-2">edit</Link>
                                                     {/* <ModalProduct productData={product} /> */}

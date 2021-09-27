@@ -8,6 +8,8 @@ import { connect } from 'react-redux'
 import './profile.css'
 import FormData from 'form-data'
 import Calendar from '../../../component/calendar/calendar';
+import { bindActionCreators } from 'redux'
+import ActionsUser from '../../../stores/action/userAction'
 
 const ProfileUser = (props) => {
 
@@ -71,6 +73,27 @@ const ProfileUser = (props) => {
 
     }, [props])
 
+    const getUser = () => {
+        axios({
+            method: 'get',
+            url: `${process.env.REACT_APP_DOMAIN}/profile/customer`,
+            headers: {
+                'token': props.user.token,
+                'content-type': 'multipart/form-data',
+            }
+        }).then((response) => {
+            const { data } = response.data;
+            props.UserSet({
+                address: data[0].address,
+                email: data[0].email,
+                image: data[0].image,
+                name: data[0].name,
+                phone: data[0].phone,
+                roles: data[0].roles,
+            })
+        }).catch(error => toast.error(error.message))
+    }
+
 
     const handleSave = () => {
         let formData = new FormData()
@@ -88,7 +111,10 @@ const ProfileUser = (props) => {
                 'token': props.user.token,
                 'content-type': 'multipart/form-data',
             }
-        }).then(res => toast.success(res.data.message))
+        }).then(res => {
+            toast.success(res.data.message)
+            getUser()
+        })
             .catch(error => toast.error(error.message))
     }
 
@@ -198,4 +224,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(ProfileUser);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        AuthSet: bindActionCreators(ActionsUser.AuthSet, dispatch),
+        UserSet: bindActionCreators(ActionsUser.UserSet, dispatch),
+    }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileUser);

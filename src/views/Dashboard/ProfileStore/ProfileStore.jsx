@@ -18,6 +18,9 @@ const ProfileStore = (props) => {
         name: '',
         email: '',
         phone: '',
+        store: '',
+        address: '',
+        image: '',
     })
 
     const getProfile = () => {
@@ -55,7 +58,7 @@ const ProfileStore = (props) => {
         setformProfile({ ...formProfile, ...{ [name]: value } })
     }
 
-    console.log(formProfile)
+    // console.log(formProfile)
 
     const fileChange = (event) => {
         const file = event.target.files[0];
@@ -74,7 +77,7 @@ const ProfileStore = (props) => {
     useEffect(() => {
         getProfile()
 
-    }, [props])
+    }, [])
 
 
     const handleSave = () => {
@@ -144,7 +147,7 @@ const ProfileStore = (props) => {
                                         <p className="text-muted"><small>Description</small></p>
                                     </label>
                                     <div className="col-sm-7">
-                                        <input type="text" className="form-control" name="description" onChange={handleChange} value={formProfile.description} />
+                                        <input type="text" className="form-control" name="description" onChange={handleChange} value={formProfile.description || "description"} />
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +158,7 @@ const ProfileStore = (props) => {
                                     </div>
                                     <div className="d-flex justify-content-center my-3">
                                         <input id="input-img-profile" type="file" style={{ display: 'none' }} onChange={fileChange} />
-                                        <button class="btn btn-outline-secondary rounded-pill btn-sm px-4" onClick={() => document.getElementById('input-img-profile').click()}>Select image</button>
+                                        <button className="btn btn-outline-secondary rounded-pill btn-sm px-4" onClick={() => document.getElementById('input-img-profile').click()}>Select image</button>
                                     </div>
                                 </div>
                             </div>

@@ -6,6 +6,7 @@ class Carousel extends Component {
     constructor(props) {
         super(props)
         this.props = props;
+        this.data = props.data;
     }
     render() {
         var settings = {
@@ -24,94 +25,23 @@ class Carousel extends Component {
             <div>
                 <h4 className="fw-bold"> {this.props.carouselName || ''} </h4>
                 <Slider {...settings}>
-                    <div className="p-2" style={{ width: this.props.width }}>
-                        <div className="card rounded-carousel">
-                            <img
-                                height={this.props.height}
-                                width={this.props.width}
-                                src="./assets/img/tshirt.png"
-                                className="card-img rounded-carousel"
-                                alt="tshirt.png"
-                            />
-                        </div>
-                    </div>
-                    <div className="p-2" style={{ width: this.props.width }}>
-                        <div className="card rounded-carousel">
-                            <img
-                                height={this.props.height}
-                                width={this.props.width}
-                                src="./assets/img/jacket.png"
-                                className="card-img rounded-carousel"
-                                alt="tshirt.png"
-                            />
-                        </div>
-                    </div>
-                    <div className="p-2" style={{ width: this.props.width }}>
-                        <div className="card rounded-carousel">
-                            <img
-                                height={this.props.height}
-                                width={this.props.width}
-                                src="./assets/img/formalsuit.png"
-                                className="card-img rounded-carousel"
-                                alt="tshirt.png"
-                            />
-                        </div>
-                    </div>
-                    <div className="p-2" style={{ width: this.props.width }}>
-                        <div className="card rounded-carousel">
-                            <img
-                                height={this.props.height}
-                                width={this.props.width}
-                                src="./assets/img/pants.png"
-                                className="card-img rounded-carousel"
-                                alt="tshirt.png"
-                            />
-                        </div>
-                    </div>
-                    <div className="p-2" style={{ width: this.props.width }}>
-                        <div className="card rounded-carousel">
-                            <img
-                                height={this.props.height}
-                                width={this.props.width}
-                                src="./assets/img/shorts.png"
-                                className="card-img rounded-carousel"
-                                alt="tshirt.png"
-                            />
-                        </div>
-                    </div>
-                    <div className="p-2" style={{ width: this.props.width }}>
-                        <div className="card rounded-carousel">
-                            <img
-                                height={this.props.height}
-                                width={this.props.width}
-                                src="./assets/img/shoes.png"
-                                className="card-img rounded-carousel"
-                                alt="tshirt.png"
-                            />
-                        </div>
-                    </div>
-                    <div className="p-2" style={{ width: this.props.width }}>
-                        <div className="card rounded-carousel">
-                            <img
-                                height={this.props.height}
-                                width={this.props.width}
-                                src="./assets/img/handbag.png"
-                                className="card-img rounded-carousel"
-                                alt="tshirt.png"
-                            />
-                        </div>
-                    </div>
-                    <div className="p-2" style={{ width: this.props.width }}>
-                        <div className="card rounded-carousel">
-                            <img
-                                height={this.props.height}
-                                width={this.props.width}
-                                src="./assets/img/accessories.png"
-                                className="card-img rounded-carousel"
-                                alt="tshirt.png"
-                            />
-                        </div>
-                    </div>
+                    {
+                        this.data.map((val, i) => {
+                            return (
+                                <div className="p-2" style={{ width: this.props.width }} key={i}>
+                                    <div className="card rounded-carousel">
+                                        <img
+                                            height={this.props.height}
+                                            width={this.props.width}
+                                            src={val.image}
+                                            className="card-img rounded-carousel"
+                                            alt="tshirt.png"
+                                        />
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
                 </Slider>
             </div>
         );
