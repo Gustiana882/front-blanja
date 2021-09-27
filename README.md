@@ -12,54 +12,39 @@
     ·
 </p>
 <hr/>
-<h4 align="center">
-Home
-</h4>
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/55304067/132006040-3446687d-ff22-4c8b-b510-60968bae9bea.png" width="600px" />
-</p>
 
-<h4 align="center">
-Filter
-</h4>
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/55304067/132006623-9931c79b-5e5d-4ff3-93d4-42b44553d3d4.png" width="600px" />
-</p>
-
-<h4 align="center">
-Login
-</h4>
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/55304067/132006737-34f0e8ed-13f8-4ad3-a164-79ae968f579d.png" width="600px" />
-</p>
-
-<h4 align="center">
-Bags
-</h4>
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/55304067/132006864-54232c9c-3cfa-4b3e-acdd-de4e44b7eaf2.png" width="600px" />
-</p>
-
-<h4 align="center">
-Profile
-</h4>
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/55304067/133736923-c037f06d-c9db-497c-894f-cb92fbd52b01.png" width="600px" />
-</p>
-
-<h4 align="center">
-Edit & Delete Product
-</h4>
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/55304067/133737032-810f7c79-5ea0-4619-8084-447b216710a4.png" width="600px" />
-</p>
-
-<h4 align="center">
-Add New Product
-</h4>
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/55304067/133737160-aa68cb8e-31be-413f-9786-f243dc4d4ad2.png" width="600px" />
-</p>
+<table>
+  <tr>
+    <th>
+      <img src="https://user-images.githubusercontent.com/55304067/134856656-458cde98-8a32-4103-8829-0c8a6db00323.png" width="300px" alt="Arkademylogo.svg" />
+    </th>
+    <th>
+      <img src="https://user-images.githubusercontent.com/55304067/134856732-221b3008-87e8-4c44-a8c6-41a97c5b396d.png" width="300px" alt="Arkademylogo.svg" />
+    </th>
+    <th>
+      <img src="https://user-images.githubusercontent.com/55304067/134856810-7c24cd21-b015-4906-884a-119f54dbb1ba.png" width="300px" alt="Arkademylogo.svg" />
+    </th>
+  </tr>
+ <tr>
+   <th>
+      <img src="https://user-images.githubusercontent.com/55304067/134857309-c34d52e2-a76d-4f07-b486-b586c3ba8235.png" width="300px" alt="Arkademylogo.svg" />
+    </th>
+    <th>
+      <img src="https://user-images.githubusercontent.com/55304067/134856828-fc566072-85a5-42c4-b693-011688d3c088.png" width="300px" alt="Arkademylogo.svg" />
+    </th>
+    <th>
+      <img src="https://user-images.githubusercontent.com/55304067/134857033-4ff38164-a1df-4bf7-93a1-2a4a1c08e739.png" width="300px" alt="Arkademylogo.svg" />
+    </th>
+  </tr>
+  <tr>
+    <th> 
+      <img src="https://user-images.githubusercontent.com/55304067/134857047-4ce9dc9c-d9ac-486d-8cad-6c14178f574b.png" width="300px" alt="Arkademylogo.svg" />
+   </th>
+    <th>
+      <img src="https://user-images.githubusercontent.com/55304067/134857315-5f13096a-46f7-487f-a719-de0d3b33198a.png" width="300px" alt="Arkademylogo.svg" />
+    </th>
+  </tr>
+</table>
 
 <p align="center">
     <a href="https://frontend-blanja.netlify.app/" target="blank">View Demo</a>
