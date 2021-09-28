@@ -19,7 +19,7 @@
       <img src="https://user-images.githubusercontent.com/55304067/134856656-458cde98-8a32-4103-8829-0c8a6db00323.png" width="300px" alt="Arkademylogo.svg" />
     </th>
     <th>
-      <img src="https://user-images.githubusercontent.com/55304067/134856732-221b3008-87e8-4c44-a8c6-41a97c5b396d.png" width="300px" alt="Arkademylogo.svg" />
+      <img src="https://user-images.githubusercontent.com/55304067/135016541-4c7480e8-288e-4783-aab7-f1835beb5141.png" width="300px" alt="Arkademylogo.svg" />
     </th>
     <th>
       <img src="https://user-images.githubusercontent.com/55304067/134856810-7c24cd21-b015-4906-884a-119f54dbb1ba.png" width="300px" alt="Arkademylogo.svg" />
@@ -37,11 +37,14 @@
     </th>
   </tr>
   <tr>
+    <th>
+      <img src="https://user-images.githubusercontent.com/55304067/135016410-046d7f1c-efc6-4aa7-9eaf-e247932a87de.png" width="300px" alt="Arkademylogo.svg" />
+    </th>
     <th> 
       <img src="https://user-images.githubusercontent.com/55304067/134857047-4ce9dc9c-d9ac-486d-8cad-6c14178f574b.png" width="300px" alt="Arkademylogo.svg" />
    </th>
     <th>
-      <img src="https://user-images.githubusercontent.com/55304067/134857315-5f13096a-46f7-487f-a719-de0d3b33198a.png" width="300px" alt="Arkademylogo.svg" />
+      <img src="https://user-images.githubusercontent.com/55304067/135016485-d49e58d5-5737-4640-aa73-7ca5a37ef076.png" width="300px" alt="Arkademylogo.svg" />
     </th>
   </tr>
 </table>
