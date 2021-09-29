@@ -30,7 +30,7 @@ const ProfileUser = (props) => {
             },
         }).then((result) => {
             if (!result.data.isError) {
-                setimageProfile(`${process.env.REACT_APP_DOMAIN}/${result.data.data[0].image}`)
+                setimageProfile(result.data.data[0].image)
                 return setformProfile(result.data.data[0])
             } else {
                 return toast.error(result.data.message)

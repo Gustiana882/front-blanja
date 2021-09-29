@@ -86,7 +86,7 @@ class Detail extends Component {
                     <section className="row justify-content-md-center">
                         <div className="col-12 col-md-6 col-lg-4 px-4">
                             <div className="card card-detail">
-                                <img src={`${process.env.REACT_APP_DOMAIN}/${this.state.product.image}`} className="card-img-top" alt="..." />
+                                <img src={this.state.product.image} className="card-img-top" alt="..." />
                             </div>
 
                         </div>

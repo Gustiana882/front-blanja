@@ -116,7 +116,7 @@ const MyProduct = (props) => {
                                         return (
                                             <div className="row align-items-center justify-content-between my-3 border p-1" key={i} >
                                                 <div className="col">
-                                                    <img src={`${process.env.REACT_APP_DOMAIN}/${product.image}`} alt="..." width={55} height={55} />
+                                                    <img src={product.image} alt="..." width={55} height={55} />
                                                 </div>
                                                 <div className="col mx-2 bag-title">
                                                     <h6 className="text-medium m-0">{product.name}</h6>

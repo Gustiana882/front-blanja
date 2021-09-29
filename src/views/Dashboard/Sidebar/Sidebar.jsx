@@ -12,7 +12,7 @@ const Sidebar = (props) => {
 
                 <div className="d-flex ms-4 mt-5 mb-4">
                     <div className="bg-secondary rounded-pill" style={{ width: '50px', height: '50px' }}>
-                        <img src={`${process.env.REACT_APP_DOMAIN}/${data.image}`} alt="" style={{ width: '50px', height: '50px' }} />
+                        <img src={data.image} alt="" style={{ width: '50px', height: '50px' }} />
                     </div>
                     <div className="ms-2">
                         <h6 className="m-0 fw-bolder">{data.name}</h6>

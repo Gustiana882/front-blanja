@@ -127,7 +127,7 @@ const Header = (props) => {
                                         <div className="dropdown">
                                             <img
                                                 className="rounded-circle dropdown-toggle"
-                                                src={`${process.env.REACT_APP_DOMAIN}/${data.image}`}
+                                                src={data.image}
                                                 alt=""
                                                 width={30}
                                                 height={30}

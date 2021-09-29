@@ -10,7 +10,7 @@ const ModalCategory = (props) => {
     const [notif, setNotif] = useState('')
     const [category, setCategory] = useState([])
     const [form, setForm] = useState({ id: null })
-    const [img, setImg] = useState(`${process.env.REACT_APP_DOMAIN}/public/images/blank.jpg`)
+    const [img, setImg] = useState('https://res.cloudinary.com/dhu2tfdji/image/upload/v1632887984/samples/image-not-found_lubthc.jpg')
 
 
     const getCategory = () => {
@@ -90,7 +90,7 @@ const ModalCategory = (props) => {
 
     const editCategory = (id, name, img) => {
         setForm({ id, name })
-        setImg(`${process.env.REACT_APP_DOMAIN}/${img}`)
+        setImg(img)
     }
 
 
@@ -193,7 +193,7 @@ const ModalCategory = (props) => {
                                                 <tr key={i}>
                                                     <td>{value.name}</td>
                                                     <td>
-                                                        <img src={`${process.env.REACT_APP_DOMAIN}/${value.image}`} className="img-thumbnail" width={40} alt="..." />
+                                                        <img src={value.image} className="img-thumbnail" width={40} alt="..." />
                                                     </td>
                                                     <td>
                                                         <Link to='#' onClick={() => {deleteCategory(value.id)}} className="badge bg-danger nav-link link-light me-2">delete</Link>

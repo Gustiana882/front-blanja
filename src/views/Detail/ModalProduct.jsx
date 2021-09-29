@@ -9,8 +9,13 @@ import { connect } from 'react-redux'
 const ModalProduct = (props) => {
 
     const [category, setCategory] = useState([])
-    const [form, setForm] = useState({})
-    const [img, setImg] = useState(`${process.env.REACT_APP_DOMAIN}/public/images/blank.jpg`)
+    const [form, setForm] = useState({
+        name: '',
+        brand: '',
+        price: '',
+        description: '',
+    })
+    const [img, setImg] = useState('https://res.cloudinary.com/dhu2tfdji/image/upload/v1632887984/samples/image-not-found_lubthc.jpg')
 
     const getCategory = () => {
         axios({
@@ -39,7 +44,7 @@ const ModalProduct = (props) => {
 
     const openModal = () => {
         setForm({ ...form, ...props.productData, ...{ category: props.productData.categories.id } })
-        setImg(`http://localhost:9000/${props.productData.image}`)
+        setImg(props.productData.image)
     }
 
 
@@ -96,12 +101,12 @@ const ModalProduct = (props) => {
         })
     }
 
-    console.log(props.productData.id_user)
     return (
         <div>
             {/* Button trigger modal */}
             {(props.user.data.roles === 'seller' && props.user.data.email === props.productData.id_user)?
                 <Link
+                    to="#"
                     type="button"
                     className="btn btn-sm rounded-pill px-4 btn-outline-danger"
                     data-bs-toggle="modal"
@@ -150,11 +155,11 @@ const ModalProduct = (props) => {
                                     <label htmlFor="exampleFormControlInput1" className="form-label">
                                         Category
                                     </label>
-                                    <select className="form-select" name="category" onChange={handleInput} defaultValue=''>
+                                    <select className="form-select" name="category" onChange={handleInput} value={form.category}>
                                         <option value={-1}>category</option>
-                                        {category.map((val) =>
+                                        {category.map((val, i) =>
 
-                                            (<option value={val.id} selected={(form.category === val.id) ? "selected" : ""}>{val.name}</option>)
+                                            (<option key={i} value={val.id} >{val.name}</option>)
 
                                         )}
                                     </select>
@@ -175,7 +180,7 @@ const ModalProduct = (props) => {
                                     <label htmlFor="exampleFormControlInput1" className="form-label">
                                         Condition
                                     </label>
-                                    <select className="form-select" name="condition" value={form.condition} onChange={handleInput}>
+                                    <select className="form-select" name="condition" defaultValue={form.condition} onChange={handleInput}>
                                         <option value="New">New</option>
                                         <option value="Secondhand">Secondhand</option>
                                     </select>

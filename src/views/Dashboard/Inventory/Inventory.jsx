@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 const Inventory = (props) => {
     const [load, setLoad] = useState(false)
     const [category, setCategory] = useState([])
-    const [img, setImg] = useState(`${process.env.REACT_APP_DOMAIN}/public/images/blank.jpg`)
+    const [img, setImg] = useState('https://res.cloudinary.com/dhu2tfdji/image/upload/v1632887984/samples/image-not-found_lubthc.jpg')
     const [form, setform] = useState({
         category: '',
         description: "description",

@@ -138,7 +138,7 @@ class Bag extends Component {
                                                 <Checkbox checked={(!checked) ? "" : "checked"} id={value.id} callback={this.selectCardBag} />
 
                                             </div>
-                                            <img src={`${process.env.REACT_APP_DOMAIN}/${value.product.image}`} alt="..." width={55} height={55} />
+                                            <img src={value.product.image} alt="..." width={55} height={55} />
                                             <div className="mx-2 bag-title">
                                                 <h6 className="text-medium m-0">{value.product.name}</h6>
                                                 <small className="brand text-secondary">{value.product.brand}</small>
