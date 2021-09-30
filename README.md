@@ -22,7 +22,7 @@
       <img src="https://user-images.githubusercontent.com/55304067/135016541-4c7480e8-288e-4783-aab7-f1835beb5141.png" width="300px" alt="Arkademylogo.svg" />
     </th>
     <th>
-      <img src="https://user-images.githubusercontent.com/55304067/134856810-7c24cd21-b015-4906-884a-119f54dbb1ba.png" width="300px" alt="Arkademylogo.svg" />
+      <img src="https://user-images.githubusercontent.com/55304067/135541967-6d138a8d-c972-453e-9968-3c96d375bced.png" width="300px" alt="Arkademylogo.svg" />
     </th>
   </tr>
  <tr>
@@ -47,10 +47,21 @@
       <img src="https://user-images.githubusercontent.com/55304067/135016485-d49e58d5-5737-4640-aa73-7ca5a37ef076.png" width="300px" alt="Arkademylogo.svg" />
     </th>
   </tr>
+  <tr>
+    <th>
+      <img src="https://user-images.githubusercontent.com/55304067/135542045-4ae7425e-00d2-4328-ae8d-0cd33f4c2586.png" width="300px" alt="Arkademylogo.svg" />
+    </th>
+    <th> 
+      <img src="https://user-images.githubusercontent.com/55304067/135542152-58864442-f6b9-4fcd-8160-afe4fc60a772.jpg" width="300px" alt="Arkademylogo.svg" />
+   </th>
+    <th>
+      <img src="https://user-images.githubusercontent.com/55304067/135542198-cf3140c1-05f2-49cd-9fff-96b02950f3ff.jpg" width="300px" alt="Arkademylogo.svg" />
+    </th>
+  </tr>
 </table>
 
 <p align="center">
-    <a href="http://blanjanow.online/" target="blank">View Demo</a>
+    <a href="https://app.blanjanow.online/" target="blank">View Demo</a>
   · <a href="https://github.com/Gustiana882/front-blanja/issues">Report Bug</a>
   · <a href="https://github.com/Gustiana882/front-blanja/pulls">Request Feature</a>
 </p>
