@@ -55,7 +55,7 @@
       <img src="https://user-images.githubusercontent.com/55304067/135542152-58864442-f6b9-4fcd-8160-afe4fc60a772.jpg" width="300px" alt="Arkademylogo.svg" />
    </th>
     <th>
-      <img src="https://user-images.githubusercontent.com/55304067/135542198-cf3140c1-05f2-49cd-9fff-96b02950f3ff.jpg" width="300px" alt="Arkademylogo.svg" />
+      <img src="https://user-images.githubusercontent.com/55304067/136120082-c1dcc20a-185c-4063-bf74-3cf0feda1fcc.jpg" width="300px" alt="Arkademylogo.svg" />
     </th>
   </tr>
 </table>
