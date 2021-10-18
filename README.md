@@ -115,6 +115,8 @@ npm install
 npm start
 ```
 
+### `Contoh Arsitektur AWS Docker +100tps`
+ <a href="https://drive.google.com/file/d/1zKeqpupTE_GiRWKlUNgglw0PGXZYhG7_/view?usp=sharing" target="blank">https://drive.google.com/file/d/1zKeqpupTE_GiRWKlUNgglw0PGXZYhG7_/view?usp=sharing</a>
 
 ### `Backend Blanja Repository`
  <a href="https://github.com/Gustiana882/backend-blanja" target="blank">https://github.com/Gustiana882/backend-blanja</a>
