@@ -115,7 +115,7 @@ npm install
 npm start
 ```
 
-### `Contoh Arsitektur AWS Docker +100tps`
+### `Contoh Arsitektur AWS Docker Lebih Dari 100 Transaksi Perdetik`
  <a href="https://drive.google.com/file/d/1zKeqpupTE_GiRWKlUNgglw0PGXZYhG7_/view?usp=sharing" target="blank">https://drive.google.com/file/d/1zKeqpupTE_GiRWKlUNgglw0PGXZYhG7_/view?usp=sharing</a>
 
 ### `Backend Blanja Repository`
